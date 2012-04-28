@@ -3,7 +3,38 @@ vbin
 
 Command Line Tools for Unix - to put in your bin directory
 
-All short bash, python, or perl scripts
+All are short bash, awk, python, or perl scripts
+
+
+* col_sum
+* histogram 
+* revver
+* sav
+* savdiff
+* unsav
+
+DETAIL DESCRIPTIONS
+===================
+
+* col_sum 
+
+  Add up a column of numbers
+
+  Syntax:
+     col_sum [ <col_num> ]
+
+      col_num - zero based.
+                Default is 0.
+
+  Example:
+
+     Sum available diskspace across all drives in MB.
+
+        df -m | col_sum +3
+
+     Count number of classes all python programs: 
+    
+        grep -c class *.py | cut -d':' -f2 | col_sum
 
 
 * histogram 

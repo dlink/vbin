@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+# col_sum [+n]
+# 
+# This script adds a column of numbers 
+# It adds up column No. [n] if specified where
+# the counting starts at column No. 0
+#
+#     ex:
+#       df | col_sum +2
+#
+# April 19, 1996
+# -dvl
+
+
+  if [[ ${1##+} != $1 ]] ; then
+    let colnum=${1##+}+1
+    shift 
+  else
+    colnum=1
+  fi
+
+
+  awk '
+    BEGIN { sum=0 }
+    { sum += $col }
+    END   { print sum }
+  ' col=$colnum  $*
