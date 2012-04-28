@@ -3,6 +3,9 @@ vbin
 
 Command Line Tools for Unix - to put in your bin directory
 
+All are bash shell scripts, or python scripts
+
+
 * histogram 
 
   Generate a histogram from a list of data.   
@@ -12,5 +15,49 @@ Command Line Tools for Unix - to put in your bin directory
     Given spreadsheet of names and addresses, as a csv file, answer
     the question: How many people come from each state:
 
-    cut -d',' -f6 | histogram
+    cut -d',' -f6 professors.csv | histogram
 
+
+* sav
+
+  Create a saved copy of a file, preserving timestamp and permissions
+
+  ADMIN: Always wise to save copy of a system file before editing it.
+
+  Example:
+
+     The following command is equivalent to: cp -p professors.csv.sav
+  
+     sav professors.csv
+
+
+  See, Also: 
+
+     savdiff, unsav, rev, unrev
+
+
+* savdiff
+
+  Compare a file with its saved version.
+
+  Example:
+
+     The following is equivalent to: diff professors.csv professors.csv.sav
+    savdiff professors.csv
+
+  See, Also:
+     sav, unsav, rev, unrev
+  
+* unsav
+
+  Un save a copy of a file
+
+  Example:
+     The following command is equivalent to: 
+      cp -p professors.csv.sav professors.csv
+
+    unsav professors.csv
+
+  See, Also:
+
+     sav, savdiff, rev, unrev

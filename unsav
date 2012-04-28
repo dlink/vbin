@@ -1,0 +1,2 @@
+echo cp -p $1.sav $1
+cp -p $1.sav $1
