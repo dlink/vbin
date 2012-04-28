@@ -3,3 +3,14 @@ vbin
 
 Command Line Tools for Unix - to put in your bin directory
 
+* histogram 
+
+  Generate a histogram from a list of data.   
+
+  Example:
+
+    Given spreadsheet of names and addresses, as a csv file, answer
+    the question: How many people come from each state:
+
+    cut -d',' -f6 | histogram
+
