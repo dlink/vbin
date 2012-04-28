@@ -1,0 +1,15 @@
+#!/usr/bin/python
+
+import os
+import sys
+
+def syntax():
+    print "  show_create <tablename>"
+    sys.exit(1)
+    
+try:
+    tablename=sys.argv[1]
+except:
+    syntax()
+
+os.system('''echo "show create table %s"''' % tablename)

@@ -1,0 +1,49 @@
+#!/usr/local/bin/env python
+
+# print out select columns from a CSV file
+
+import sys
+import os
+import csv
+
+class Columns(object):
+
+   def __init__(self, file, colspec):
+      self.file = file
+      self.cols = map(int, colspec.split(','))
+
+      fp=open(file, 'r')
+      self.rows = csv.reader(fp, delimiter=',', escapechar='\\')
+
+   def print_(self):
+
+      # build mask:
+      mask = ''
+      for col in self.cols:
+         if col != self.cols[0]:
+            mask += ','
+         mask += '%s'
+
+      for row in self.rows:
+         vars = []
+         for col in self.cols:
+            vars.append(row[col-1])
+         print mask % tuple(vars)
+
+def syntax():
+   progname = os.path.basename(sys.argv[0])
+   print "  Print Columns from CSV files" 
+   print
+   print "     %s <file> <colspec>" % progname
+   print
+   print "       where <colspec> is comma sep col numbers.  ie. - 1,2,5"
+   print
+   
+if __name__ == '__main__':
+   if len(sys.argv) < 3:
+      syntax()
+   
+   file = sys.argv[1]
+   colspec = sys.argv[2]
+   
+   Columns(file, colspec).print_()

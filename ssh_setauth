@@ -1,0 +1,94 @@
+#!/bin/bash
+
+# Program: ssh_setauth
+# Setup unix accounts for non-password ssh connections
+# This program modifies files in users .ssh directory.
+# 3/31/2005 David Link
+
+
+# Defaults:
+
+account1=$USER@$HOSTNAME
+
+# Syntax function:
+
+function syntax () {
+  echo " ssh_setauth [ -n ] USERNAME@HOST"
+  echo 
+  echo "  USERNAME@HOST is the account you are connecting to from $account1"
+  echo
+  echo "  OPTIONS:"
+  echo "    -n  no prompting   (default: Prompting)"
+  #echo "    -v  verbose        (default: Off)"
+  echo
+  exit 1
+}
+
+
+# Debug
+
+prompting=1
+S_connection=1    # step 1
+S_gen_rsakey=1    # step 2
+S_copy_rsakey=1   # step 3
+
+# Command line options:
+
+if [[ $1 = '-n' ]] ; then prompting= ; shift; fi
+if [[ -z $1     ]] ; then syntax ; exit 1 ; fi
+account2=$1;
+
+# Communication:
+
+echo
+echo $account1 connecting to $account2:
+
+# Prompting:
+
+if [[ -n $prompting ]]; then
+   echo -n \
+   "Setup non-password ssh connection (y/n): "
+   read yn
+   if [[ $yn != 'Y' && $yn != 'y' ]]; then
+      #exit_cleanup 0;
+      exit;
+   fi
+fi
+
+# 1. Establish ssh connection from account1 to account2
+
+echo
+echo Connecting to $account2 ...
+if [[ -n $S_connection ]] ; then
+   key2=$(ssh -t $account2 "ls ~/.ssh/id_rsa.pub 2>/dev/null") #\
+fi
+
+# 2. Generate RSA KEY for ACCOUNT1 if neces.
+
+if [[ -n $S_gen_rsakey && ! -f ~/.ssh/id_rsa.pub ]];  then 
+    echo Need to generate RSA Key for $account1
+    ssh-keygen -t rsa
+fi
+
+# 3. Copy ACCOUNT1's RSA KEY to ACCOUNT2 (into .ssh/authorized_keys2)
+
+if [[ -n $S_copy_rsakey ]] ; then
+   echo
+   echo "Copying RSA key to $account2 ..." 
+   key=`cat ~/.ssh/id_rsa.pub`
+   ssh $account2 "
+       if [[ ! -d .ssh ]] ; then mkdir -m 700 .ssh ; fi && 
+       echo $key >> ~/.ssh/authorized_keys2"
+fi
+
+echo
+echo Done.
+
+echo
+echo "You may need to change file permission on remote host to look like this:"
+echo "  drwxr-xr-x   ."
+echo "  drwx------   .ssh"
+echo "  -rw-r--r--   .ssh/authorized_keys2"
+
+
+

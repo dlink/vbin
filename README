@@ -6,14 +6,58 @@ Command Line Tools for Unix - to put in your bin directory
 All are short bash, awk, python, or perl scripts
 
 * clip
-* col_sum
-* count   - SQL
-* desc  - SQL
-* histogram 
+* dos2unix
+* histogram
+* lshead
+* orig
+* origdiff
+* phplook
+* pllook
+* psgrep
+* pylook
 * revver
 * sav
 * savdiff
+* show_env.pl
+* ssh_setauth
+* striphtml
+* tally
+* tildadiff
+* txt2html
+* unix2dos
+* unorig
 * unsav
+
+CSV Tools
+
+* flatten
+* col_sum
+* cols
+* csv2html
+* csv2inserts
+* csv2wiki
+* csvformat
+* csvformat2
+* t2c
+* unflatten
+
+SQL Tools
+
+* count
+* count_distinct
+* desc
+* explain
+* sql_pretty
+* show_create
+* show_header
+* show_indexes
+* show_tables
+* select5
+* selectall
+* selecthistogram
+* selectmax
+* selectsome
+
 
 DETAIL DESCRIPTIONS
 ===================

@@ -1,0 +1,16 @@
+#!/usr/bin/python
+
+import os
+import sys
+
+def syntax():
+    print "  tally <columnname> <tablename> | <dbalias>"
+    sys.exit(1)
+    
+try:
+    columnname=sys.argv[1]
+    tablename=sys.argv[2]
+except:
+    syntax()
+
+os.system('''echo "select %s, count(*) from %s group by 1 order by 2 desc ;"''' % (columnname, tablename))

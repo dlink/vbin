@@ -1,0 +1,66 @@
+#!/usr/bin/python
+#
+# convert csv file to html format
+
+import sys
+import csv
+
+CELLSPACING=0
+CELLPADDING=4
+BORDER=1
+
+def syntax(msg=None):
+    if msg:
+        print msg
+        print
+    print "csv2html <filename>"
+    print
+    sys.exit(1)
+
+try:
+    filename = sys.argv[1]
+except:
+    syntax()
+
+
+# read it
+fp=open(filename, 'r')
+rows = csv.reader(fp, delimiter=',', escapechar='\\')
+table = []
+for fields in rows:
+    i = 0
+    row = []
+    for field in fields:
+        field = field.strip()
+        row.append(field)
+        i += 1
+    table.append(row)
+fp.close()
+
+# output html format
+
+print "<table>"
+for row in table:
+    print "  <tr>"
+    for cell in row:
+        print "    <td>%s</td>" % cell
+    print "  </tr>"
+print "</table>"
+
+# output wiki format
+"""
+print '{| cellspacing="%s" cellpadding="%s" border="%s"' \
+    % (CELLSPACING, CELLPADDING, BORDER)
+i = 0
+for row in table:
+    i += 1
+    if i == 1:
+        delim = '!'
+    else:
+        delim = '|'
+        print "|-"
+    print '\n'.join(["%s%s" % (delim, x) for x in row])
+
+print "|}\n"
+    
+"""

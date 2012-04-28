@@ -17,13 +17,41 @@ elif [[ $1 = 9 ]] ; then
   cut -c641-720
 elif [[ $1 = 'long' ]]; then
   if [[ $2 = 2 ]] ; then
-    cut -c166-330
+    cut -c159-316
   elif [[ $2 = 3 ]]; then
-    cut -c331-495
+    cut -c317-474
   elif [[ $2 = 4 ]]; then
-    cut -c496-659
+    cut -c475-632
+  elif [[ $2 = 5 ]]; then
+    cut -c633-790
+  elif [[ $2 = 6 ]]; then
+    cut -c791-948
+  elif [[ $2 = 7 ]]; then
+    cut -c949-1106
+  elif [[ $2 = 8 ]]; then
+    cut -c1107-1264
+  elif [[ $2 = 9 ]]; then
+    cut -c1265-1422
+  elif [[ $2 = 10 ]]; then
+    cut -c1423-1580
+  elif [[ $2 = 11 ]]; then
+    cut -c1581-1738
+  elif [[ $2 = 12 ]]; then
+    cut -c1739-1896
+  elif [[ $2 = 13 ]]; then
+    cut -c1897-2054
+  elif [[ $2 = 14 ]]; then
+    cut -c2055-2212
+  elif [[ $2 = 15 ]]; then
+    cut -c2213-2370
+  elif [[ $2 = 16 ]]; then
+    cut -c2371-2528
+  elif [[ $2 = 17 ]]; then
+    cut -c2529-2686
+  elif [[ $2 = 18 ]]; then
+    cut -c2687-2844
   else
-    cut -c1-165
+    cut -c1-158 
   fi
 else 
   cut -c1-80
