@@ -1,0 +1,15 @@
+#!/usr/bin/perl -w
+
+use Getopt::Std;
+
+
+
+my %opts = ();
+getopts ('w', \%opts);
+my $w = '';
+$w = '-w' if $opts{w};
+
+my $file = shift;
+
+print "diff $w $file~ $file\n";
+system ("diff $w $file~ $file");

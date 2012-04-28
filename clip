@@ -1,0 +1,30 @@
+#!/bin/bash
+if [[ $1 = 2 ]] ; then 
+  cut -c81-160
+elif [[ $1 = 3 ]] ; then
+  cut -c161-240
+elif [[ $1 = 4 ]] ; then
+  cut -c241-320
+elif [[ $1 = 5 ]] ; then
+  cut -c321-400
+elif [[ $1 = 6 ]] ; then
+  cut -c401-480
+elif [[ $1 = 7 ]] ; then
+  cut -c481-560
+elif [[ $1 = 8 ]] ; then
+  cut -c561-640
+elif [[ $1 = 9 ]] ; then
+  cut -c641-720
+elif [[ $1 = 'long' ]]; then
+  if [[ $2 = 2 ]] ; then
+    cut -c166-330
+  elif [[ $2 = 3 ]]; then
+    cut -c331-495
+  elif [[ $2 = 4 ]]; then
+    cut -c496-659
+  else
+    cut -c1-165
+  fi
+else 
+  cut -c1-80
+fi

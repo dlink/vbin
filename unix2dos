@@ -1,0 +1,9 @@
+#!/usr/bin/perl -pi
+#
+# Convert Unix text file to DOS file format.  Conversion is done in-place.
+#
+# Usage: unix2dos unixfile ...
+
+print STDERR "Converting \"$ARGV\" ...\n" if (eof || ($. == 0));
+s/$/\015/;                      # tack on ^M
+s/\n/\n\032/ if (eof);          # DOS ^Z at end of file.

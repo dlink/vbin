@@ -5,8 +5,10 @@ Command Line Tools for Unix - to put in your bin directory
 
 All are short bash, awk, python, or perl scripts
 
-
+* clip
 * col_sum
+* count   - SQL
+* desc  - SQL
 * histogram 
 * revver
 * sav

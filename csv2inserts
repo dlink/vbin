@@ -1,0 +1,97 @@
+#!/usr/bin/python
+"""
+Given csv file, with column name definitions in the first row,
+Generate an SQL INSERT statement.
+
+commas and quotes in input file need to be escaped.  eq. \, and \'.
+
+quotes will be converted to 
+The tokens "(comma)" and "(quote)" in the csv input file will be converted to for ",", and "''" respectively in the output. 
+""" 
+
+import sys
+import csv
+
+"""
+NEED_QUOTES = [ 'activity_type', 'code', 'comments', 'country_code',
+                'coupon_type', 'created', 'department', 'description',
+                'discount_type', 'download_file', 'entity_type',
+                'evocation', 'first_name', 'gc_code',
+                'harmonized_code', 'invoice_date', 'language_code',
+                'last_name', 'name', 'order_date', 'order_type',
+                'passwd', 'product_file', 'purchase_date',
+                'recipient_name', 'reference_number', 'sender_name', 'sku',
+                'start_date', 'subdirectory', 'termination_date',
+                'transaction_return_code', 'uri', 'username',
+                'verified_by', 'version', 'work_type', 'symbol' ]
+"""
+NEED_QUOTES = [ 'code','description','name','address1', 'address2','address3','city','state','zipcode','email','website','phone']
+
+#SKIP_COLUMNS = ['last_updated',
+#                'invoice_date'
+#                ]
+SKIP_COLUMNS = []
+
+def syntax():
+    print "csv2inserts <tablename>"
+    print
+    sys.exit(1)
+
+# get cmd line args:
+try:
+    tablename = sys.argv[1]
+except:
+    syntax()
+
+# convert csv filenames to tablenames, if nec.
+if tablename.endswith('.csv'):
+    tablename = tablename.replace('.csv', '')
+
+# get csv file:
+filename='%s.csv' % tablename    
+try:
+    f = open(filename)
+except Exception, e:
+    print "Unable to open file: %s.\n%s" % (filename, e)
+    sys.exit(1)
+    
+cnt = 0
+columns = []
+skip_column_nums = []
+
+# run thu csv file
+rows = csv.reader(f, delimiter=',', escapechar='\\')
+for data in rows:
+
+    if not data:
+        continue
+    data = [x.strip() for x in data]
+    
+    cnt += 1
+
+    # first row is column info
+    if cnt == 1:
+        columns = data
+        # find columns to skip
+        for i in range(len(columns)):
+            if columns[i] in SKIP_COLUMNS:
+                skip_column_nums.append(i)
+        # remove columns to skip
+        for i in skip_column_nums:
+            del columns[i]
+        continue
+
+    # skip som columns
+    for i in skip_column_nums:
+        del data[i]
+
+    # build INSERT statement
+    for i in range(len(columns)):
+        data[i] = data[i].replace("'", "''")
+        if columns[i] in NEED_QUOTES and data[i] != 'NULL':
+            data[i] = "'%s'" % data[i]
+
+    print "INSERT INTO %s (%s) VALUES (%s);" % (tablename,
+                                             ', '.join(columns),
+                                             ', '.join(data))
+    

@@ -1,0 +1,17 @@
+#!/usr/bin/python
+
+import os
+import sys
+
+def syntax():
+    print "  selectsome <tablename> <columnname> <value> | <dbalias>"
+    sys.exit(1)
+    
+try:
+    tablename=sys.argv[1]
+    columnname=sys.argv[2]
+    value=sys.argv[3]
+except:
+    syntax()
+
+os.system('''echo "select * from %s where %s = '%s' \G"''' % (tablename, columnname, value))

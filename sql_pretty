@@ -1,0 +1,26 @@
+#!/usr/bin/perl -w
+
+use lib ("$ENV{HOME}/video/perl-lib");
+use VNU;
+
+for my $filename (@ARGV) {
+    open FILE, "<$filename" or die "$!: $filename\n";
+    my $sql = '';
+    while (<FILE>) {
+	chomp;
+	$sql .= $_;
+    }
+    close FILE;
+    print sql_pretty($sql), "\n";
+}
+    
+__END__
+    #print "$sql\n";
+    #print "\n";
+
+    (my $select_clause = $sql) =~ s/^SELECT (.*) FROM .*$/$1/i;
+    
+    #print "select_clause = $select_clause\n";
+    print "select\n\t";
+    print join(",\n\t", split(', *', $select_clause)), "\n";
+}

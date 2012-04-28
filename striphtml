@@ -1,0 +1,35 @@
+#!/usr/bin/perl -w
+
+my $w = "";
+while (<>) {
+  $w .= $_;
+}
+
+# remove javascript:
+$w =~ s/\<script .*? \/script>//gisx;
+
+# put commas betwen table columns:
+$w =~ s/ \<\/td\> \s* \<td[^<]*\>/, /gisx;
+
+$w =~ s/\<p>/\n/gsx;
+
+# remove all tags:
+$w =~ s/\<[^<]*\>/ /gsx;
+
+# change &nbsp to spaces:
+$w =~ s/\&nbsp/ /gsx;
+
+# change &lrsquo; and &rsquo; to ' and &lt; &gt; to > and <
+$w =~ s/\&[lr]squo;/'/gsx;
+$w =~ s/\&lt;/</gsx;
+$w =~ s/\&gt;/>/gsx;
+
+# change multiple spaces into single space:
+$w =~ s/\n[ \t]+/\n/gs;
+$w =~ s/[ \t]+/ /gs;
+
+# kill extra blank lines
+$w =~ s/\n\n+/\n\n/gs;
+
+print $w;
+

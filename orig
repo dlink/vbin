@@ -1,0 +1,4 @@
+echo cp -p $1 $1.orig
+cp -p $1 $1.orig
+
+
