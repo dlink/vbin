@@ -3,7 +3,7 @@ vbin
 
 Command Line Tools for Unix - to put in your bin directory
 
-All are bash shell scripts, or python scripts
+All short bash, python, or perl scripts
 
 
 * histogram 
@@ -17,6 +17,44 @@ All are bash shell scripts, or python scripts
 
     cut -d',' -f6 professors.csv | histogram
 
+
+* revver
+
+  Create versioned copies of a file with postfixes: _1, _2, etc.
+  It is inspired by VMS O/S.
+
+  Always wise to make a copy of a system file before editing it.
+
+  Syntax:
+
+    revver [-u] filea [fileb, ...]
+    -u  to unroll revisions
+
+  Example:
+
+     The following command
+
+        revver list list_1
+
+     Does:
+
+        mv -f list list_1
+
+     After recreating the original list and running the same command a
+     second time you will see:
+
+        mv -f list_1 list_2
+        mv -f list list_1
+
+     The -u command undoes a revision.  So
+
+        revver -u list
+
+     Does:
+
+        mv -f list_1 list
+        mv -f list_2 list_1
+         
 
 * sav
 
@@ -33,7 +71,7 @@ All are bash shell scripts, or python scripts
 
   See, Also: 
 
-     savdiff, unsav, rev, unrev
+     savdiff, unsav, revver
 
 
 * savdiff
@@ -46,7 +84,7 @@ All are bash shell scripts, or python scripts
     savdiff professors.csv
 
   See, Also:
-     sav, unsav, rev, unrev
+     sav, unsav, revver
   
 * unsav
 
@@ -60,4 +98,4 @@ All are bash shell scripts, or python scripts
 
   See, Also:
 
-     sav, savdiff, rev, unrev
+     sav, savdiff, revver

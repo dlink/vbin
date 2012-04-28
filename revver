@@ -1,0 +1,74 @@
+#!/usr/bin/perl -w
+# 21-mar-2002 -dvl
+
+use strict;
+my $p=$0; $p =~ s/^.*\///;
+
+if ($#ARGV < 0) {
+    print "\nRoll revision numbers on a file (ie. mv myfile1 myfile2\n";
+    print "    $p [-u] filea [fileb, ...]\n";
+    print "    -u  to unroll revisions\n";
+
+    exit 1;
+}
+
+my $undo = 0;
+if ($ARGV[0] eq '-u') {
+    $undo = 1;
+    shift;
+}
+if (!$undo) {
+    for my $file (@ARGV) {
+	chomp $file;
+	my $fexists = 1;
+	open (F, "ls ${file}_[0-9] 2>/dev/null| sort -r |");
+	my $cmd;
+	while (<F>) {
+	    chomp;
+	    /${file}_/;
+            my $ver = $';
+            my $ver2 = $' + 1;
+            $cmd = "mv -f ${file}_$ver ${file}_$ver2";
+            print "$cmd\n";
+            system($cmd);
+       }
+       $fexists = 1;
+       open (F2, ${file}) or $fexists = 0;
+       if ($fexists) {
+	   close (F2);
+           $cmd = "mv -f ${file} ${file}_1";
+           system($cmd);
+           print "$cmd\n";
+       }
+    }
+}
+else {
+    for my $file (@ARGV) {
+	chomp $file;
+	open (F, "ls ${file}_[0-9] | sort |");
+	my $cmd;
+	while (<F>) {
+	    chomp;
+	    /${file}_/;
+            my $ver = $';
+	    my $ver2 = $' - 1;
+            if ($ver2 == 0) {
+		my $fexists = 1;
+		open (F2, $file) or $fexists = 0;
+		if ($fexists) {
+		    close (F2);
+		    doo ("mv -f ${file} ${file}_bak");
+		}
+		doo ("mv -f ${file}_1 ${file}");
+	    }
+	    else {
+		doo ("mv -f ${file}_$ver ${file}_$ver2");
+	    }
+        }
+    }
+}
+
+sub doo {
+    print "$_[0]\n";
+    system($_[0]);
+}
