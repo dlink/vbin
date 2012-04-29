@@ -7,6 +7,7 @@ All are short bash, awk, python, or perl scripts
 
 * clip
 * dos2unix
+* flatten
 * histogram
 * lshead
 * orig
@@ -21,16 +22,17 @@ All are short bash, awk, python, or perl scripts
 * show_env.pl
 * ssh_setauth
 * striphtml
+* t2c
 * tally
 * tildadiff
 * txt2html
+* unflatten
 * unix2dos
 * unorig
 * unsav
 
 CSV Tools
 
-* flatten
 * col_sum
 * cols
 * csv2html
@@ -38,8 +40,7 @@ CSV Tools
 * csv2wiki
 * csvformat
 * csvformat2
-* t2c
-* unflatten
+* show_header
 
 SQL Tools
 
@@ -49,7 +50,6 @@ SQL Tools
 * explain
 * sql_pretty
 * show_create
-* show_header
 * show_indexes
 * show_tables
 * select5
