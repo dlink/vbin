@@ -31,8 +31,10 @@ try:
 except:
     syntax()
 
-
-fp=open(filename, 'r')
+if filename == '-':
+    fp = sys.stdin
+else:
+    fp=open(filename, 'r')
 
 # Init max column lengths:
 lengths = [0]*50
@@ -47,6 +49,9 @@ for fields in rows:
         field = field.strip()
         lengths[i] = max(len(field), lengths[i])
         row.append(field)
+        i += 1
+    if not fields: # keep blank lines
+        row.append('')
         i += 1
     table.append(row)
 
