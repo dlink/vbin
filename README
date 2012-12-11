@@ -1,9 +1,12 @@
 vbin
 ====
 
-Command Line Tools for Unix - to put in your bin directory
+Command Line Tools for Unix 
 
 All are short bash, awk, python, or perl scripts
+
+Created by Dlink
+Source: https://github.com/dlink/vbin
 
 * clip
 * dos2unix
