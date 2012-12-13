@@ -12,6 +12,7 @@ INFILE = 'books.csv'
 TEST_2_7_8 = 'books_2_7_8.test'
 TEST_26_2 = 'books_26_2.test'
 TEST_24_to_26_2 = 'books_24_to_26_2.test'
+TEST_PRETTY = 'books_pretty.test'
 
 class TestCSV(unittest.TestCase):
 
@@ -32,6 +33,10 @@ class TestCSV(unittest.TestCase):
     def test_columns_range(self):
         self.csv.colspec = '24-26,2'
         self.assertEqual(self.csv.toStr(), read(TEST_24_to_26_2))
+
+    def test_pretty(self):
+        self.csv.pretty_print = True
+        self.assertEqual(self.csv.toStr(), read(TEST_PRETTY))
 
 def read(file):
     return open(file, 'r').read()
