@@ -1,4 +1,4 @@
-#!/bin/env python
+#!/usr/bin/env python
 
 # Goal:
 # csv -s FILE        # show header
@@ -13,9 +13,6 @@
 'red'
 # csv -f "1 in (blue,green)"
 # csv -f "1 ~ ^abc.*$"
-
-
-csv [flags]
 
 import sys
 import csv
