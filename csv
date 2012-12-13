@@ -25,19 +25,36 @@ class CSV(object):
     def __init__(self, file):
         self.file = file
         self.colspec = None
-        
+        self.pretty_print = False
+        self.lengths = [0]*50
+        self.process_successful = False
+
     def process(self):
         results = []
         try:
             rows = csv.reader(self.fp, delimiter=',', escapechar='\\')
-            for y, fields in enumerate(rows):
-                if not self.columns:
-                    row2 = fields
+            for n, row in enumerate(rows):
+                newrow = []
+                if self.columns:
+                    # use user spec columns:
+                    i = 0
+                    for n in self.columns:
+                        self.lengths[i]=max(len(row[n-1]),self.lengths[i])
+                        cell = row[n-1]
+                        if ',' in cell:
+                            cell = '"%s"' % cell
+                        newrow.append(cell)
+                        i += 1
                 else:
-                    row2 = []
-                    for c in self.columns:
-                        row2.append(fields[c-1])
-                results.append(row2)
+                    # use all columns
+                    for i, cell in enumerate(row):
+                        self.lengths[i] = max(len(cell), self.lengths[i])
+                        if ',' in cell:
+                            cell = '"%s"' % cell
+                        newrow.append(cell)
+                results.append(newrow)
+            self.process_successful = True
+
         except Exception, e:
             results = "%s: %s" % (e.__class__.__name__, e)
         return results        
@@ -75,8 +92,29 @@ class CSV(object):
                 print 'columns:', self._columns
         return self._columns
     
+    def prettyPrint(self, table):
+        o = ''
+        for row in table:
+            i = 0
+            line = []
+            for field in row:
+                if i < len(row)-1:
+                    s = "%s," % field
+                    o += s.ljust(self.lengths[i]+2)
+                else:
+                    o += "%s\n" % field
+                i += 1
+        return o
+    
+
     def toStr(self):
         results = self.process()
+
+        # pretty_print?
+        if self.pretty_print and self.process_successful:
+            return self.prettyPrint(results)
+
+        # Handle anything:
         o = ''
         if isinstance(results, (list, tuple)):
             #print 'r:', results
@@ -96,10 +134,11 @@ if __name__ == '__main__':
     parser.add_argument('file')
     parser.add_argument('-c', dest='colspec', metavar='<colspec>',
                         help='List or range of column numbers.  eq. - 2,1,4-6')
-    #parser.add_argument('-p', dest='pretty_print', action='store_true',
-    #                    help='Pretty-Print output')
+    parser.add_argument('-p', dest='pretty_print', action='store_true',
+                        help='Pretty-Print output')
     args = parser.parse_args()
 
     f = CSV(args.file)
-    f.colspec = args.colspec
+    f.colspec      = args.colspec
+    f.pretty_print = args.pretty_print
     print f.toStr()[:-1]
