@@ -18,6 +18,8 @@ import sys
 import csv
 import re
 
+SHOW_TRACEBACK = 0
+
 class CSVError(Exception): pass
 
 class CSV(object):
@@ -26,7 +28,7 @@ class CSV(object):
         self.file = file
         self.colspec = None
         self.pretty_print = False
-        self.lengths = [0]*50
+        self.lengths = []
         self.show_header = False
         self.process_successful = False
 
@@ -40,27 +42,35 @@ class CSV(object):
                     # use user spec columns:
                     i = 0
                     for n in self.columns:
-                        self.lengths[i]=max(len(row[n-1]),self.lengths[i])
-                        cell = row[n-1]
-                        if ',' in cell:
-                            cell = '"%s"' % cell
-                        newrow.append(cell)
+                        newrow.append(self.processCell(i, row[n-1]))
                         i += 1
                 else:
                     # use all columns
                     for i, cell in enumerate(row):
-                        self.lengths[i] = max(len(cell), self.lengths[i])
-                        if ',' in cell:
-                            cell = '"%s"' % cell
-                        newrow.append(cell)
+                        newrow.append(self.processCell(i, cell))
                 results.append(newrow)
                 if self.show_header:
                     break
             self.process_successful = True
 
         except Exception, e:
+            if SHOW_TRACEBACK:
+                raise
             results = "%s: %s" % (e.__class__.__name__, e)
         return results        
+    
+    def processCell(self, i, cell):        
+        '''Given current column counter, and raw cell data
+           Behavior: Keep max lengths up-to-date
+                     Add double quotes on Cell if nec.
+           Return: Cell as STRING
+        '''
+        if i > len(self.lengths)-1:
+            self.lengths.append(0)
+        self.lengths[i]=max(len(cell),self.lengths[i])
+        if ',' in cell:
+            return '"%s"' % cell
+        return cell
 
     @property
     def fp(self):
