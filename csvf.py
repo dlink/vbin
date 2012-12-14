@@ -27,6 +27,7 @@ class CSV(object):
         self.colspec = None
         self.pretty_print = False
         self.lengths = [0]*50
+        self.show_header = False
         self.process_successful = False
 
     def process(self):
@@ -53,6 +54,8 @@ class CSV(object):
                             cell = '"%s"' % cell
                         newrow.append(cell)
                 results.append(newrow)
+                if self.show_header:
+                    break
             self.process_successful = True
 
         except Exception, e:
@@ -92,6 +95,12 @@ class CSV(object):
                 print 'columns:', self._columns
         return self._columns
     
+    def showHeader(self, table):
+        o = ''
+        for i, x in enumerate(table[0]):
+            o += "%s. %s\n"  % (i+1, x)
+        return o
+
     def prettyPrint(self, table):
         o = ''
         for row in table:
@@ -109,6 +118,10 @@ class CSV(object):
 
     def toStr(self):
         results = self.process()
+
+        # show_header?
+        if self.show_header:
+            return self.showHeader(results)
 
         # pretty_print?
         if self.pretty_print and self.process_successful:
@@ -136,9 +149,14 @@ if __name__ == '__main__':
                         help='List or range of column numbers.  eq. - 2,1,4-6')
     parser.add_argument('-p', dest='pretty_print', action='store_true',
                         help='Pretty-Print output')
+    parser.add_argument('-s', dest='show_header', action='store_true',
+                        help='show column headers')
     args = parser.parse_args()
 
     f = CSV(args.file)
-    f.colspec      = args.colspec
-    f.pretty_print = args.pretty_print
-    print f.toStr()[:-1]
+    if args.show_header:
+        f.show_header = True
+    else:
+        f.colspec      = args.colspec
+        f.pretty_print = args.pretty_print
+    print f.toStr().strip()

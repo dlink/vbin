@@ -13,6 +13,7 @@ TEST_2_7_8 = 'books_2_7_8.test'
 TEST_26_2 = 'books_26_2.test'
 TEST_24_to_26_2 = 'books_24_to_26_2.test'
 TEST_PRETTY = 'books_pretty.test'
+TEST_SHOW_HEADER = 'books_show_header.test'
 
 class TestCSV(unittest.TestCase):
 
@@ -37,6 +38,10 @@ class TestCSV(unittest.TestCase):
     def test_pretty(self):
         self.csv.pretty_print = True
         self.assertEqual(self.csv.toStr(), read(TEST_PRETTY))
+
+    def test_show_header(self):
+        self.csv.show_header = True
+        self.assertEqual(self.csv.toStr(), read(TEST_SHOW_HEADER))
 
 def read(file):
     return open(file, 'r').read()
