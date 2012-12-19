@@ -78,7 +78,7 @@ class CSV(object):
            use stdin for -
         '''
         if '_fp' not in self.__dict__:
-            if self.file == '_':
+            if self.file == '-':
                 self._fp = sys.stdin
             else:
                 self._fp = open(self.file, 'r')
