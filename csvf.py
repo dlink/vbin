@@ -155,18 +155,18 @@ class CSV(object):
 if __name__ == '__main__':
     import argparse
 
-    parser = argparse.ArgumentParser(description="CSV file utility.")
-    parser.add_argument('file')
-    parser.add_argument('-c', dest='colspec', metavar='<colspec>',
+    p = argparse.ArgumentParser(description="CSV file utility.")
+    p.add_argument('file')
+    p.add_argument('-c', dest='colspec', metavar='<colspec>',
                         help='List or range of column numbers.  eq. - 2,1,4-6')
-    parser.add_argument('-d', dest='delimiter', metavar='<delimiter>',
+    p.add_argument('-d', dest='delimiter', metavar='<delimiter>',
                         default=',',
                         help='Set delimiter.  Default is comma (,)')
-    parser.add_argument('-p', dest='pretty_print', action='store_true',
+    p.add_argument('-p', dest='pretty_print', action='store_true',
                         help='Pretty-Print output')
-    parser.add_argument('-s', dest='show_header', action='store_true',
+    p.add_argument('-s', dest='show_header', action='store_true',
                         help='show column headers')
-    args = parser.parse_args()
+    args = p.parse_args()
 
     f = CSV(args.file)
     if args.show_header:
