@@ -26,6 +26,7 @@ class CSV(object):
     
     def __init__(self, file):
         self.file = file
+        self.delimiter = ','
         self.colspec = None
         self.pretty_print = False
         self.lengths = []
@@ -35,7 +36,8 @@ class CSV(object):
     def process(self):
         results = []
         try:
-            rows = csv.reader(self.fp, delimiter=',', escapechar='\\')
+            rows = csv.reader(self.fp, delimiter=self.delimiter,
+                              escapechar='\\')
             for n, row in enumerate(rows):
                 newrow = []
                 if self.columns:
@@ -157,6 +159,9 @@ if __name__ == '__main__':
     parser.add_argument('file')
     parser.add_argument('-c', dest='colspec', metavar='<colspec>',
                         help='List or range of column numbers.  eq. - 2,1,4-6')
+    parser.add_argument('-d', dest='delimiter', metavar='<delimiter>',
+                        default=',',
+                        help='Set delimiter.  Default is comma (,)')
     parser.add_argument('-p', dest='pretty_print', action='store_true',
                         help='Pretty-Print output')
     parser.add_argument('-s', dest='show_header', action='store_true',
@@ -168,5 +173,6 @@ if __name__ == '__main__':
         f.show_header = True
     else:
         f.colspec      = args.colspec
+        f.delimiter    = args.delimiter
         f.pretty_print = args.pretty_print
     print f.toStr().strip()
