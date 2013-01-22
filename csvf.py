@@ -151,28 +151,37 @@ class CSV(object):
         else:
             o = results
         return o
-    
+
 if __name__ == '__main__':
     import argparse
 
+    # Set up Args:
     p = argparse.ArgumentParser(description="CSV file utility.")
     p.add_argument('file')
-    p.add_argument('-c', dest='colspec', metavar='<colspec>',
+    p.add_argument('-c', dest='colspec',
+                   metavar='<colspec>',
                    help='List or range of column numbers.  eq. - 2,1,4-6')
-    p.add_argument('-d', dest='delimiter', metavar='<delimiter>',
+    p.add_argument('-d', dest='delimiter',
+                   metavar='<delimiter>',
                    default=',',
                    help='Set delimiter.  Default is comma (,)')
-    p.add_argument('-p', dest='pretty_print', action='store_true',
+    p.add_argument('-p', dest='pretty_print',
+                   action='store_true',
                    help='Pretty-Print output')
-    p.add_argument('-s', dest='show_header', action='store_true',
+    p.add_argument('-s', dest='show_header',
+                   action='store_true',
+                   default=False,
                    help='show column headers')
     args = p.parse_args()
 
+    # parse
     f = CSV(args.file)
-    if args.show_header:
-        f.show_header = True
-    else:
-        f.colspec      = args.colspec
-        f.delimiter    = args.delimiter
-        f.pretty_print = args.pretty_print
+
+    # Set output params:
+    f.show_header  = args.show_header
+    f.colspec      = args.colspec
+    f.delimiter    = args.delimiter
+    f.pretty_print = args.pretty_print
+
+    # return result
     print f.toStr().strip()
