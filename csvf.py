@@ -158,14 +158,14 @@ if __name__ == '__main__':
     p = argparse.ArgumentParser(description="CSV file utility.")
     p.add_argument('file')
     p.add_argument('-c', dest='colspec', metavar='<colspec>',
-                        help='List or range of column numbers.  eq. - 2,1,4-6')
+                   help='List or range of column numbers.  eq. - 2,1,4-6')
     p.add_argument('-d', dest='delimiter', metavar='<delimiter>',
-                        default=',',
-                        help='Set delimiter.  Default is comma (,)')
+                   default=',',
+                   help='Set delimiter.  Default is comma (,)')
     p.add_argument('-p', dest='pretty_print', action='store_true',
-                        help='Pretty-Print output')
+                   help='Pretty-Print output')
     p.add_argument('-s', dest='show_header', action='store_true',
-                        help='show column headers')
+                   help='show column headers')
     args = p.parse_args()
 
     f = CSV(args.file)
