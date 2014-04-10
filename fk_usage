@@ -1,0 +1,24 @@
+#!/usr/bin/python
+
+import os
+import sys
+
+def syntax():
+    print "  fwk_usage <schema> <tablename>"
+    sys.exit(1)
+    
+try:
+    schema = sys.argv[1]
+    tablename=sys.argv[2]
+except:
+    syntax()
+
+sql = '''select 
+   constraint_name, table_name, referenced_table_name 
+from 
+   information_schema.referential_constraints 
+where 
+   constraint_schema = '%s' and referenced_table_name = '%s' ''' \
+% (schema, tablename)
+
+os.system('''echo "%s"''' % sql)

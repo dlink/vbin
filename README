@@ -51,6 +51,7 @@ SQL Tools
 * count_distinct
 * desc
 * explain
+* fwk_usage
 * sql_pretty
 * show_create
 * show_indexes
@@ -84,6 +85,22 @@ DETAIL DESCRIPTIONS
      Count number of classes all python programs: 
     
         grep -c class *.py | cut -d':' -f2 | col_sum
+
+
+* fwk_usage
+
+  List all foreign keys that refer to a given table
+
+  Example:
+
+    fwk_usage central order_items | mysql <signature> -t
+
+    Returns:
+    +-----------------+------------+-----------------------+
+    | constraint_name | table_name | referenced_table_name |
+    +-----------------+------------+-----------------------+
+    | shipping_ibfk_1 | shipping   | order_items           |
+    +-----------------+------------+-----------------------+
 
 
 * histogram 
