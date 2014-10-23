@@ -4,12 +4,12 @@ import os
 import sys
 
 def syntax():
-    print "  tally <columnname> <tablename> | <dbalias>"
+    print "  tally <tablename> <columnname>| <dbalias>"
     sys.exit(1)
     
 try:
-    columnname=sys.argv[1]
-    tablename=sys.argv[2]
+    tablename=sys.argv[1]
+    columnname=sys.argv[2]
 except:
     syntax()
 
