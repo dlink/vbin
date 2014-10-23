@@ -130,6 +130,8 @@ class CSV(object):
 
     def toStr(self):
         results = self.process()
+        if not self.process_successful:
+            return results
 
         # show_header?
         if self.show_header:

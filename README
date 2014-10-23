@@ -51,6 +51,7 @@ SQL Tools
 * count_distinct
 * desc
 * explain
+* fwk_usage
 * sql_pretty
 * show_create
 * show_indexes
@@ -64,7 +65,23 @@ SQL Tools
 
 DETAIL DESCRIPTIONS
 ===================
+* clip
 
+  Clip output horizontally. Defaults to 80 columns.  Good to avoid wrapping on the console
+  
+  Syntax:
+     clip [<long>] [<page_num>]
+     
+  Example:
+     # for 80 column screens:
+     cat log | clip     # show first page, ie. cut -c1-80)
+     cat log | clip 2   # show second page, ie. cut -c81-160
+     cat log | clip 3   # show third page, ie. cut -c161-240
+
+     # for wider screens     
+     cat log | clip long   # show first long page, ie. cut -c1-158
+     cat log | clip long 2 # show second long page, ie. cut -c159-316
+     
 * col_sum 
 
   Add up a column of numbers
@@ -84,6 +101,22 @@ DETAIL DESCRIPTIONS
      Count number of classes all python programs: 
     
         grep -c class *.py | cut -d':' -f2 | col_sum
+
+
+* fwk_usage
+
+  List all foreign keys that refer to a given table
+
+  Example:
+
+    fwk_usage central order_items | mysql <signature> -t
+
+    Returns:
+    +-----------------+------------+-----------------------+
+    | constraint_name | table_name | referenced_table_name |
+    +-----------------+------------+-----------------------+
+    | shipping_ibfk_1 | shipping   | order_items           |
+    +-----------------+------------+-----------------------+
 
 
 * histogram 

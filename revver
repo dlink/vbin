@@ -7,16 +7,22 @@ my $p=$0; $p =~ s/^.*\///;
 if ($#ARGV < 0) {
     print "\nRoll revision numbers on a file (ie. mv myfile1 myfile2\n";
     print "    $p [-u] filea [fileb, ...]\n";
+    print "    -q  quiet mode\n";
     print "    -u  to unroll revisions\n";
 
     exit 1;
 }
 
 my $undo = 0;
-if ($ARGV[0] eq '-u') {
-    $undo = 1;
-    shift;
+my $quiet = 0;
+my @args;
+for my $a (@ARGV) {
+    if    ($a eq '-u') { $undo  = 1 }
+    elsif ($a eq '-q') { $quiet = 1 }
+    else               { push @args, $a }
 }
+@ARGV = @args;
+
 if (!$undo) {
     for my $file (@ARGV) {
 	chomp $file;
@@ -29,7 +35,9 @@ if (!$undo) {
             my $ver = $';
             my $ver2 = $' + 1;
             $cmd = "mv -f ${file}_$ver ${file}_$ver2";
-            print "$cmd\n";
+            if (!$quiet) {
+		print "$cmd\n";
+	    }
             system($cmd);
        }
        $fexists = 1;
@@ -37,8 +45,10 @@ if (!$undo) {
        if ($fexists) {
 	   close (F2);
            $cmd = "mv -f ${file} ${file}_1";
-           system($cmd);
-           print "$cmd\n";
+	   system($cmd);
+	   if (!$quiet) {
+	       print "$cmd\n";
+	   }
        }
     }
 }
@@ -69,6 +79,8 @@ else {
 }
 
 sub doo {
-    print "$_[0]\n";
+    if (!$quiet) {
+	print "$_[0]\n";
+    }
     system($_[0]);
 }
