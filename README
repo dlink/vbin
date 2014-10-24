@@ -3,38 +3,75 @@ vbin
 
 Command Line Tools for Unix 
 
-All are short bash, awk, python, or perl scripts
+All are short bash, awk, python, or perl scripts that can be used together with other Unix Bash command to form a formiable arsenal of tools.
 
 Created by Dlink
 Source: https://github.com/dlink/vbin
 
-* clip
-* dos2unix
-* flatten
-* histogram
-* lshead
-* orig
-* origdiff
-* phplook
-* pllook
-* psgrep
-* pylook
-* revver
-* sav
-* savdiff
-* show_env.pl
-* ssh_setauth
-* striphtml
-* t2c
-* tally
-* tildadiff
-* txt2html
-* unflatten
-* unix2dos
-* unorig
-* unsav
+Install
+-------
+A good place to install vbin is in /usr/local/vbin, but you can install where ever you like.  It is best to add it to your Unix PATH environment variable.
 
-CSV Tools
+Here is an example install:
+ 
+    $ sudo su -
+    # cd /usr/local
+    # git clone git@github.com:dlink/vbin.git
+
+Now add it to everyones PATH
+
+    # cd /etc/profile.d
+    # cat > vbin
+    PATH=$PATH:/usr/local/vbin
+    ^D
+    
+Test it:
+
+    $ lshead
+
+
+Commands Listing
+----------------
+### General Tools ###
+
+<table><tr><td>
+
+<li> clip
+<li> dos2unix
+<li> flatten
+<li> histogram
+<li> lshead
+<li> orig
+<li> origdiff
+<li> phplook
+<li> pllook
+
+</td><td>
+
+<li> psgrep
+<li> pylook
+<li> revver
+<li> sav
+<li> savdiff
+<li> show_env.pl
+<li> ssh_setauth
+<li> striphtml
+<li> t2c
+
+</td><td valign='top'>
+
+<li> tally
+<li> tildadiff
+<li> txt2html
+<li> unflatten
+<li> unix2dos
+<li> unorig
+<li> unsav
+
+</td></tr></table>
+
+
+### CSV Tools ###
 
 * col_sum
 * cols
@@ -45,7 +82,7 @@ CSV Tools
 * csvformat2
 * show_header
 
-SQL Tools
+### SQL Tools ###
 
 * count
 * count_distinct
@@ -65,7 +102,7 @@ SQL Tools
 
 DETAIL DESCRIPTIONS
 ===================
-* clip
+#### clip ####
 
   Clip output horizontally. Defaults to 80 columns.  Good to avoid wrapping on the console
   
