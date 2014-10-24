@@ -148,6 +148,7 @@ DETAIL DESCRIPTIONS
     fk_usage central order_items | mysql <signature> -t
 
     Returns:
+
     +-----------------+------------+-----------------------+
     | constraint_name | table_name | referenced_table_name |
     +-----------------+------------+-----------------------+
