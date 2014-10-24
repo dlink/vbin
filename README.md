@@ -36,15 +36,15 @@ Commands Listing
 
 <table><tr><td>
 
-<li> clip
-<li> dos2unix
-<li> flatten
-<li> histogram
-<li> lshead
-<li> orig
-<li> origdiff
-<li> phplook
-<li> pllook
+clip <br/>
+dos2unix <br/>
+flatten <br/>
+histogram <br/>
+lshead <br/>
+orig <br/>
+origdiff <br/>
+phplook <br/>
+pllook <br/>
 
 </td><td>
 
