@@ -36,37 +36,36 @@ Commands Listing
 
 <table><tr><td>
 
-clip <br/>
-dos2unix <br/>
-flatten <br/>
-histogram <br/>
-lshead <br/>
-orig <br/>
-origdiff <br/>
-phplook <br/>
-pllook <br/>
+<li> clip <br/>
+<li> dos2unix <br/>
+<li> flatten <br/>
+<li> histogram <br/>
+<li> lshead <br/>
+<li> orig <br/>
+<li> origdiff <br/>
+<li> phplook <br/>
 
 </td><td>
 
-<li> psgrep
-<li> pylook
-<li> revver
-<li> sav
-<li> savdiff
-<li> show_env.pl
-<li> ssh_setauth
-<li> striphtml
-<li> t2c
+<li> pllook <br/>
+<li> psgrep <br/>
+<li> pylook <br/>
+<li> revver <br/>
+<li> sav <br/>
+<li> savdiff <br/>
+<li> show_env.pl <br/>
+<li> ssh_setauth <br/>
 
 </td><td valign='top'>
 
-<li> tally
-<li> tildadiff
-<li> txt2html
-<li> unflatten
-<li> unix2dos
-<li> unorig
-<li> unsav
+<li> striphtml <br/>
+<li> t2c <br/>
+<li> tildadiff <br/>
+<li> txt2html <br/>
+<li> unflatten <br/>
+<li> unix2dos <br/>
+<li> unorig <br/>
+<li> unsav <br/>
 
 </td></tr></table>
 
@@ -88,7 +87,6 @@ pllook <br/>
 * count_distinct
 * desc
 * explain
-* fwk_usage
 * sql_pretty
 * show_create
 * show_indexes
@@ -98,7 +96,7 @@ pllook <br/>
 * selecthistogram
 * selectmax
 * selectsome
-
+* tally
 
 DETAIL DESCRIPTIONS
 ===================
