@@ -87,7 +87,6 @@ Commands Listing
 * count_distinct
 * desc
 * explain
-* fk_usage
 * sql_pretty
 * show_create
 * show_indexes
@@ -139,21 +138,21 @@ DETAIL DESCRIPTIONS
         grep -c class *.py | cut -d':' -f2 | col_sum
 
 
-* fk_usage
+* fwk_usage
 
   List all foreign keys that refer to a given table
 
   Example:
 
-    fk_usage central order_items | mysql <signature> -t
+    fwk_usage central order_items | mysql <signature> -t
 
     Returns:
 
-    +-----------------+------------+-----------------------+
-    | constraint_name | table_name | referenced_table_name |
-    +-----------------+------------+-----------------------+
-    | shipping_ibfk_1 | shipping   | order_items           |
-    +-----------------+------------+-----------------------+
+      +-----------------+------------+-----------------------+
+      | constraint_name | table_name | referenced_table_name |
+      +-----------------+------------+-----------------------+
+      | shipping_ibfk_1 | shipping   | order_items           |
+      +-----------------+------------+-----------------------+
 
 
 * histogram 
