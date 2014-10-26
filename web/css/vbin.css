@@ -1,0 +1,23 @@
+body {
+   margin: 20px 200px;
+   font-size: 0.8em;
+   background-color: white;
+   width: 500px;
+}
+h4 {
+   margin-top: 50px;
+}
+pre {
+   font-size: 1.2em;
+   background-color: #E2E2E6; /* lightgrey; */
+}
+pre.syntax {
+   font-size: 1.4em;
+   font-weight: bold;
+   background-color: #DBFFB8; /* #CCFF99; light green; */
+}
+
+td {
+   padding: 10px 20px;
+   font-size: 0.8em;
+}

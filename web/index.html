@@ -1,0 +1,157 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link href="http://crowfly.net/css/main.css" rel="stylesheet" type="text/css" />
+<link href="css/vbin.css" rel="stylesheet" type="text/css" />
+<title>vbin</title>
+</head>
+
+<body>
+
+<center><h3>vbin</h3></center>
+
+<p><i><b>vbin</b></i> is a collection of Command Line Tools for Unix.  They are used with other Unix Bash commands to form a formiable arsenal of tools.</p>
+
+<p>Source: <a href="https://github.com/dlink/vbin">https://github.com/dlink/vbin</a></p>
+
+<div id="commandList">
+
+<table border=1 cellpadding=3 cellspacing=0>
+   <tr>
+      <td><a href="#revverHelp" class="simpleLink">revver</a></td>
+      <td><a href="#savHelp" class="simpleLink">sav</a></td>
+      <td><a href="#savdiffHelp" class="simpleLink">savdiff</a></td>
+      <td><a href="#unsavHelp" class="simpleLink">unsav</a></td>
+   </tr>
+</table>
+</div>
+
+<hr>
+<!-- revver ------------------------------------------>
+
+<div id="revverHelp">
+<h4>revver</h4>
+<p>Roll revision copies of a file with postfixes: _1, _2, etc. It is inspired by VMS O/S.</p>
+
+<pre class="syntax">
+
+   revver [&lt;options&gt;] &lt;filename&gt;
+
+        options:
+           -q  quite mode
+           -u  Unroll revisions
+
+</pre>
+
+<p>Example:</p>
+
+<pre>
+
+  $ revver book.xml
+  mv -f book.xml book.xml_1
+
+</pre>
+
+Running the same command a second time (after recreating the original):
+
+<pre>
+
+  $ revver book.xml
+  mv -f book.xml_1 book.xml_2
+  mv -f book.xml book_xml_1
+
+</pre>
+
+<p>A maximum of 10 revisions will be kept.</p>
+
+<p>The -u command unrolls revisions.   It also makes a "_bak" copy of the original before it is replaced with the "_1"</p>
+
+<pre>
+
+  $ revver -u book.xml
+  mv -f book.xml book.xml_bak
+  mv -f book.xml_1 book.xml
+  mv -f book.xml_2 book_xml_1
+
+</pre>
+
+See, Also:
+
+<a href="#savHelp">sav</a>, <a href="#savdiffHelp">savdiff</a>, <a href="#unsavHelp">unsav</a>
+
+<hr>
+<!-- sav --------------------------------------------->
+
+<div id="savHelp">
+<h4>sav</h4>
+<p>Create a copy of a file, preserving timestamp and permissions.  The new file will have the '.sav' file extenion.</p>
+
+<pre class="syntax">
+
+   sav &lt;filename&gt;
+
+</pre>
+<p>Example:<p>
+
+<pre>
+
+   $ sav professors.csv
+   cp -p professors.csv professors.csv.sav
+
+</pre>
+
+See, Also:
+
+<a href="#savdiffHelp">savdiff</a>, <a href="#unsavHelp">unsav</a>, <a href="#revverHelp">revver</a>
+
+<hr>
+<!-- savdiff ----------------------------------------->
+
+<div id="savdiffHelp">
+<h4>savdiff</h4>
+<p>Compare a saved copy of a file with the original.  This command assumes you have run the <a href="#savHelp">sav</a> command previously.
+<pre class="syntax">
+
+   savdiff &lt;filename&gt;
+
+</pre>
+
+<p>Example:<p>
+
+<pre>
+
+   $ savdiff professors.csv
+   diff  professors.csv.sav professors.csv.sav
+   ...
+
+</pre>
+
+See, Also:
+
+<a href="#savHelp">sav</a>, <a href="#unsavHelp">unsav</a>, <a href="#revverHelp">revver</a>
+
+<hr>
+<!-- unsav ------------------------------------------->
+
+<div id="unsavHelp">
+<h4>unsav</h4>
+<pre>   unsav &lt;filename&gt;</pre>
+<p>Copy a saved file back to the original.  This is the reverse of the <a href="#savHelp">sav</a> command.
+
+<p>Example:</p>
+
+<pre>
+   $ unsav professors.csv
+   cp -p professors.csv/sav professors.csv
+</pre>
+
+See, Also:
+
+<a href="#savHelp">sav</a>, <a href="#savdiffHelp">savdiff</a>, <a href="#revverHelp">revver</a>
+
+
+
+
+</div>
+
+</body>
