@@ -76,23 +76,6 @@ Commands Listing
 
 DETAIL DESCRIPTIONS
 ===================
-#### clip ####
-
-  Clip output horizontally. Defaults to 80 columns.  Good to avoid wrapping on the console
-  
-  Syntax:
-     clip [<long>] [<page_num>]
-     
-  Example:
-     # for 80 column screens:
-     cat log | clip     # show first page, ie. cut -c1-80)
-     cat log | clip 2   # show second page, ie. cut -c81-160
-     cat log | clip 3   # show third page, ie. cut -c161-240
-
-     # for wider screens     
-     cat log | clip long   # show first long page, ie. cut -c1-158
-     cat log | clip long 2 # show second long page, ie. cut -c159-316
-     
 * col_sum 
 
   Add up a column of numbers

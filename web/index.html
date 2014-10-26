@@ -19,6 +19,7 @@
 <table border=1 cellpadding=3 cellspacing=0>
    <tr>
       <td><a href="#installHelp" class="simpleLink">Installation</a></td>
+      <td><a href="#clipHelp" class="simpleLink">clip</a></td>
       <td><a href="#lsheadHelp" class="simpleLink">lshead</a></td>
       <td><a href="#psgrepHelp" class="simpleLink">psgrep</a></td>
       <td><a href="#revverHelp" class="simpleLink">revver</a></td>
@@ -78,6 +79,46 @@ See, Also:
 
 <hr>
 
+<!-- clip -------------------------------------------->
+
+<div id="clipHelp">
+<h4>clip</h4>
+<p>Clip the output on the screen horizontally, to avoid word wrap.  You can in affect page right and left thru very wide outputs<p>
+
+<pre class="syntax">
+
+    SOMECOMMAND | clip [long] [&lt;PAGE_NUM&gt;]
+
+</pre>
+
+<p>Clip defaults to 80 columns.</p>
+
+<p>Example: 
+
+For 80 column screens: 
+
+<pre>
+
+   $ cat log | clip      # show first page, ie. cut -c1-80)
+   $ cat log | clip 2    # show second page, ie. cut -c81-160
+   $ cat log | clip 3    # show third page, ie. cut -c161-240
+
+</pre>
+
+For wider screens     
+
+<pre>
+
+   $ cat log | clip long      # show first long page, ie. cut -c1-158
+   $ cat log | clip long 2    # show second long page, ie. cut -c159-316
+
+</pre>
+
+
+See, Also:
+
+<a href="#topics">topics</a>
+<hr>
 <!-- lshead ------------------------------------------>
 
 <div id="lsheadHelp">
@@ -112,7 +153,7 @@ The command simply does a <i>ls -l | head &lt;directory&gt;</i>.  It is an excel
 
 See, Also:
 
-<a href="#topics">topics</a>, <a href="#savHelp">sav</a>, <a href="#savdiffHelp">savdiff</a>, <a href="#revverHelp">revver</a>
+<a href="#topics">topics</a>
 <hr>
 
 <!-- psgrep ------------------------------------------>
