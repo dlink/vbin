@@ -1,34 +1,11 @@
 vbin
 ====
 
-Command Line Tools for Unix 
+vbin is a collection of Command Line Tools for Unix.  They are used with other Unix Bash commands to form a formiable arsenal of tools.
 
-All are short bash, awk, python, or perl scripts that can be used together with other Unix Bash command to form a formiable arsenal of tools.
-
-Created by Dlink
 Source: https://github.com/dlink/vbin
 
-Install
--------
-A good place to install vbin is in /usr/local/vbin, but you can install where ever you like.  It is best to add it to your Unix PATH environment variable.
-
-Here is an example install:
- 
-    $ sudo su -
-    # cd /usr/local
-    # git clone git@github.com:dlink/vbin.git
-
-Now add it to everyones PATH
-
-    # cd /etc/profile.d
-    # cat > vbin
-    PATH=$PATH:/usr/local/vbin
-    ^D
-    
-Test it:
-
-    $ lshead
-
+Documentation: http://crowfly.net/vbin
 
 Commands Listing
 ----------------
@@ -166,84 +143,3 @@ DETAIL DESCRIPTIONS
     cut -d',' -f6 professors.csv | histogram
 
 
-* revver
-
-  Create versioned copies of a file with postfixes: _1, _2, etc.
-  It is inspired by VMS O/S.
-
-  Always wise to make a copy of a system file before editing it.
-
-  Syntax:
-
-    revver [-u] filea [fileb, ...]
-    -u  to unroll revisions
-
-  Example:
-
-     The following command
-
-        revver list list_1
-
-     Does:
-
-        mv -f list list_1
-
-     After recreating the original list and running the same command a
-     second time you will see:
-
-        mv -f list_1 list_2
-        mv -f list list_1
-
-     The -u command undoes a revision.  So
-
-        revver -u list
-
-     Does:
-
-        mv -f list_1 list
-        mv -f list_2 list_1
-         
-
-* sav
-
-  Create a saved copy of a file, preserving timestamp and permissions
-
-  ADMIN: Always wise to save copy of a system file before editing it.
-
-  Example:
-
-     The following command is equivalent to: cp -p professors.csv.sav
-  
-     sav professors.csv
-
-
-  See, Also: 
-
-     savdiff, unsav, revver
-
-
-* savdiff
-
-  Compare a file with its saved version.
-
-  Example:
-
-     The following is equivalent to: diff professors.csv professors.csv.sav
-    savdiff professors.csv
-
-  See, Also:
-     sav, unsav, revver
-  
-* unsav
-
-  Un save a copy of a file
-
-  Example:
-     The following command is equivalent to: 
-      cp -p professors.csv.sav professors.csv
-
-    unsav professors.csv
-
-  See, Also:
-
-     sav, savdiff, revver
