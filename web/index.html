@@ -14,10 +14,13 @@
 
 <p>Source: <a href="https://github.com/dlink/vbin">https://github.com/dlink/vbin</a></p>
 
-<div id="commandList">
-
+<div id="topics">
+<p>Topics</p>
 <table border=1 cellpadding=3 cellspacing=0>
    <tr>
+      <td><a href="#installHelp" class="simpleLink">Installation</a></td>
+      <td><a href="#lsheadHelp" class="simpleLink">lshead</a></td>
+      <td><a href="#psgrepHelp" class="simpleLink">psgrep</a></td>
       <td><a href="#revverHelp" class="simpleLink">revver</a></td>
       <td><a href="#savHelp" class="simpleLink">sav</a></td>
       <td><a href="#savdiffHelp" class="simpleLink">savdiff</a></td>
@@ -27,6 +30,137 @@
 </div>
 
 <hr>
+
+<!-- install ----------------------------------------->
+
+<div id="installHelp">
+<h4>Installation</h4>
+
+<p>In a nutshell here it is:</p>
+<pre>
+
+   $ git clone git@github.com:dlink/vbin.git
+   $ export PATH=$PATH:$HOME/vbin
+
+</pre>
+
+You can add the PATH command to your .bash_profile.
+
+<h5>Site Install</h5>
+
+<p>A good place to install <i>vbin</i> is in /usr/local/vbin, as root.  Then add it to the Unix PATH in /etc/profile.d for everyone<p>
+
+Here is an example install as root:
+<pre>
+
+   $ sudo su -
+   # cd /usr/local
+   # git clone git@github.com:dlink/vbin.git
+
+   # cd /etc/profile.d
+   # cat > vbin
+   PATH=$PATH:/usr/local/vbin
+   ^D  (cntrl-D)
+
+</pre>
+
+Test it:
+
+<pre>
+
+   $ lshead
+
+</pre>
+
+See, Also:
+
+<a href="#topics">topics</a>
+
+<hr>
+
+<!-- lshead ------------------------------------------>
+
+<div id="lsheadHelp">
+<h4>lshead</h4>
+List the top 10 most recently edited files in a subdirectory.
+
+<pre class="syntax">
+
+   lshead [&lt;directory&gt;]
+
+</pre>
+
+The command simply does a <i>ls -l | head &lt;directory&gt;</i>.  It is an excellent way to see what was being worked on recenly.
+
+<p>Example:</p>
+
+<pre>
+
+   $ lshead
+   total 232
+   -rwxrwxr-x  1 dlink fwk 55136 Sep 26 11:07 #bookserver.py#
+   -rw-rw-r--  1 dlink fwk 29863 Sep 26 10:47 overlay.pyc
+   -rw-rw-r--  1 dlink fwk 40520 Sep 26 10:19 bookserver.pyc
+   drwxrwxr-x  2 dlink fwk  4096 Sep 26 10:19 alter_xmls
+   -rwxrwxr-x  1 dlink fwk 55136 Sep 26 10:19 bookserver.py
+   drwxrwxr-x  2 dlink fwk  4096 Sep 26 10:19 elements
+   -rwxrwxr-x  1 dlink fwk 39698 Sep 16 16:46 overlay.py
+   -rwxrwxr-x  1 dlink fwk  9567 Sep 16 08:09 bss.py
+   -rw-rw-r--  1 dlink fwk  4214 Sep 16 07:53 fupload.pyc
+
+</pre>
+
+See, Also:
+
+<a href="#topics">topics</a>, <a href="#savHelp">sav</a>, <a href="#savdiffHelp">savdiff</a>, <a href="#revverHelp">revver</a>
+<hr>
+
+<!-- psgrep ------------------------------------------>
+
+<div id="psgrepHelp">
+<h4>psgrep</h4>
+Search all running processes.  It is a combination of <i>ps</i> and <i>grep</i>.
+
+<pre class="syntax">
+
+   psgrep PATTERN
+
+</pre>
+
+The command simply does a <i>ps -ef | grep PATTERN</i>.  It is an excellent way to see whats running.
+
+The command will aways return your current process, as well.
+
+<p>Examples:</p>
+
+<p>Is MySQL running?:</p>
+<pre>
+
+   $ psgrep mysql
+   mysql      917     1  0 Sep28 ?        00:26:44 /usr/sbin/mysqld
+   dlink    16116 16114  0 22:53 pts/2    00:00:00 grep mysql
+
+</pre>
+<p>Yes.</p>
+
+<p>Is Plague online?</p>
+
+<pre>
+
+   $ psgrep plague  
+   plague      29510 29508  0 Sep26 ?        00:00:00 -bash -c cd /asphyxia/lib && ./asphyx.py 
+   plague      29539 29510  0 Sep26 ?        02:50:51 /usr/local/bin/python ./asphx.py
+   plague      29577 29576  0 Sep26 ?        00:00:00 -bash -c cd /asphyxia/lib && ./workflowd.py 
+   plague      29606 29577  0 Sep26 ?        02:38:57 python ./workflowd.py
+
+</pre>
+<p>No, but he's running some daemons.</p>
+
+See, Also:
+
+<a href="#topics">topics</a>
+<hr>
+
 <!-- revver ------------------------------------------>
 
 <div id="revverHelp">
@@ -77,9 +211,10 @@ Running the same command a second time (after recreating the original):
 
 See, Also:
 
-<a href="#savHelp">sav</a>, <a href="#savdiffHelp">savdiff</a>, <a href="#unsavHelp">unsav</a>
+<a href="#topics">topics</a>, <a href="#savHelp">sav</a>, <a href="#savdiffHelp">savdiff</a>, <a href="#unsavHelp">unsav</a>
 
 <hr>
+
 <!-- sav --------------------------------------------->
 
 <div id="savHelp">
@@ -102,7 +237,7 @@ See, Also:
 
 See, Also:
 
-<a href="#savdiffHelp">savdiff</a>, <a href="#unsavHelp">unsav</a>, <a href="#revverHelp">revver</a>
+<a href="#topics">topics</a>, <a href="#savdiffHelp">savdiff</a>, <a href="#unsavHelp">unsav</a>, <a href="#revverHelp">revver</a>
 
 <hr>
 <!-- savdiff ----------------------------------------->
@@ -128,26 +263,32 @@ See, Also:
 
 See, Also:
 
-<a href="#savHelp">sav</a>, <a href="#unsavHelp">unsav</a>, <a href="#revverHelp">revver</a>
+<a href="#topics">topics</a>, <a href="#savHelp">sav</a>, <a href="#unsavHelp">unsav</a>, <a href="#revverHelp">revver</a>
 
 <hr>
 <!-- unsav ------------------------------------------->
 
 <div id="unsavHelp">
 <h4>unsav</h4>
-<pre>   unsav &lt;filename&gt;</pre>
 <p>Copy a saved file back to the original.  This is the reverse of the <a href="#savHelp">sav</a> command.
+<pre class="syntax">
+
+   unsav &lt;filename&gt;
+
+</pre>
 
 <p>Example:</p>
 
 <pre>
+
    $ unsav professors.csv
    cp -p professors.csv/sav professors.csv
+
 </pre>
 
 See, Also:
 
-<a href="#savHelp">sav</a>, <a href="#savdiffHelp">savdiff</a>, <a href="#revverHelp">revver</a>
+<a href="#topics">topics</a>, <a href="#savHelp">sav</a>, <a href="#savdiffHelp">savdiff</a>, <a href="#revverHelp">revver</a>
 
 
 
