@@ -73,7 +73,6 @@ Commands Listing
 ### CSV Tools ###
 
 * col_sum
-* cols
 * csv2html
 * csv2inserts
 * csv2wiki
