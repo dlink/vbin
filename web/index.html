@@ -26,6 +26,7 @@
       <td><a href="#revverHelp" class="simpleLink">revver</a></td>
       <td><a href="#savHelp" class="simpleLink">sav</a></td>
       <td><a href="#savdiffHelp" class="simpleLink">savdiff</a></td>
+      <td><a href="#t2cHelp" class="simpleLink">t2c</a></td>
       <td><a href="#unsavHelp" class="simpleLink">unsav</a></td>
    </tr>
 </table>
@@ -306,6 +307,32 @@ See, Also:
 See, Also:
 
 <a href="#topics">topics</a>, <a href="#savHelp">sav</a>, <a href="#unsavHelp">unsav</a>, <a href="#revverHelp">revver</a>
+
+<hr>
+<!-- t2c  -------------------------------------------->
+
+<div id="t2cHelp">
+<h4>t2c</h4>
+<p>Convert tab delineated files into csv files.  It respects quotes, and inline commas.  Thanks to Ignacio Vazquez-Abrams and his 
+<a href="http://stackoverflow.com/questions/2535255/fastest-way-convert-tab-delimited-file-to-csv-in-linux#answer-2535337">post</a>
+ on Stackoverflow.</p>
+<pre class="syntax">
+
+   &lt;STDOUT&gt; | t2c 
+
+</pre>
+
+<p>Example:<p>
+
+<pre>
+
+   $ echo 'select * from books' | mysql books | t2c > books.csv
+
+</pre>
+
+See, Also:
+
+<a href="#topics">topics</a>
 
 <hr>
 <!-- unsav ------------------------------------------->
