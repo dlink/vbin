@@ -1,0 +1,19 @@
+#!/usr/bin/env python
+
+# Convert Tab delinated files to csv
+#
+#   Useful for:
+#
+#       echo my.sql | mydb | t2c > my.csv
+#
+# Thanks to:
+#   Ignacio Vazquez-Abram, for providing in a Stackoverflow Answer:
+#  (http://stackoverflow.com/questions/2535255/fastest-way-convert-tab-delimited-file-to-csv-in-linux#answer-2535337)
+
+import sys
+import csv
+
+tabin = csv.reader(sys.stdin, dialect=csv.excel_tab)
+commaout = csv.writer(sys.stdout, dialect=csv.excel)
+for row in tabin:
+  commaout.writerow(row)
