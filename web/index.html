@@ -26,8 +26,17 @@
       <td><a href="#revverHelp" class="simpleLink">revver</a></td>
       <td><a href="#savHelp" class="simpleLink">sav</a></td>
       <td><a href="#savdiffHelp" class="simpleLink">savdiff</a></td>
+      <td><a href="#takeHelp" class="simpleLink">take</a></td>
+   <tr>
+   </tr>
       <td><a href="#t2cHelp" class="simpleLink">t2c</a></td>
       <td><a href="#unsavHelp" class="simpleLink">unsav</a></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
    </tr>
 </table>
 </div>
@@ -309,28 +318,39 @@ See, Also:
 <a href="#topics">topics</a>, <a href="#savHelp">sav</a>, <a href="#unsavHelp">unsav</a>, <a href="#revverHelp">revver</a>
 
 <hr>
-<!-- t2c  -------------------------------------------->
+<!-- take -------------------------------------------->
 
-<div id="t2cHelp">
-<h4>t2c</h4>
-<p>Convert tab delineated files into csv files.  It respects quotes, and inline commas.  Thanks to Ignacio Vazquez-Abrams and his 
-<a href="http://stackoverflow.com/questions/2535255/fastest-way-convert-tab-delimited-file-to-csv-in-linux#answer-2535337">post</a>
- on Stackoverflow.</p>
+<div id="takeHelp">
+<h4>take</h4>
+<p>"Take" some lines out of a file between two given line numbers (&lt;FROM&gt; and &lt;TO&gt;).  This is useful for cutting groups of lines out of long files.<p>
+
 <pre class="syntax">
 
-   &lt;STDOUT&gt; | t2c 
+   &lt;STDOUT&gt; | take &lt;FROM&gt; &lt;TO&gt;
 
 </pre>
 
 <p>Example:<p>
 
+
+# eq.
+#     # the following returns 10 lines (11, ..., 20)
+#     cat books.csv | take 10 20   
+
 <pre>
 
-   $ echo 'select * from books' | mysql books | t2c > books.csv
+   $ cat ids.csv | take 1001 2000
 
 </pre>
+<p>The above returns 1000 lines from ids.csv (lines 1001, ..., 2000)</p>
 
-See, Also:
+<pre>
+
+   $ cat ids.csv | take 1000 2000 | while read i; do echo $i ; ./myprocess.py $i ; done
+
+</pre>
+<p>The above displays and processes each id returned from take.</p>
+
 
 <a href="#topics">topics</a>
 
