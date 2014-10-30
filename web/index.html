@@ -17,21 +17,21 @@
 <div id="topics">
 <p>Topics</p>
 <p>10/27/2014: Not yet fully documented. see github</p>
-<table border=1 cellpadding=3 cellspacing=0>
+<table border=1 cellpadding=1 cellspacing=0>
    <tr>
       <td><a href="#installHelp" class="simpleLink">Installation</a></td>
       <td><a href="#clipHelp" class="simpleLink">clip</a></td>
+      <td><a href="#col_sumHelp" class="simpleLink">col_sum</a></td>
       <td><a href="#lsheadHelp" class="simpleLink">lshead</a></td>
       <td><a href="#psgrepHelp" class="simpleLink">psgrep</a></td>
       <td><a href="#revverHelp" class="simpleLink">revver</a></td>
       <td><a href="#savHelp" class="simpleLink">sav</a></td>
       <td><a href="#savdiffHelp" class="simpleLink">savdiff</a></td>
-      <td><a href="#takeHelp" class="simpleLink">take</a></td>
    <tr>
    </tr>
+      <td><a href="#takeHelp" class="simpleLink">take</a></td>
       <td><a href="#t2cHelp" class="simpleLink">t2c</a></td>
       <td><a href="#unsavHelp" class="simpleLink">unsav</a></td>
-      <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
@@ -115,6 +115,55 @@ For 80 column screens:
    $ cat log | clip 3    # show third page, ie. cut -c161-240
 
 </pre>
+
+For wider screens     
+
+<pre>
+
+   $ cat log | clip long      # show first long page, ie. cut -c1-158
+   $ cat log | clip long 2    # show second long page, ie. cut -c159-316
+
+</pre>
+
+
+See, Also:
+
+<a href="#topics">topics</a>
+<hr>
+
+<!-- col_sum ----------------------------------------->
+
+<div id="col_sumHelp">
+<h4>col_sum</h4>
+<p>Add up a column of numbers.  Works well with tables and csv files</p>
+
+<pre class="syntax">
+
+   &lt;STDOUT&gt; | col_sum [ &lt;COL&gt; ]
+
+	COL - Number of the column you want to sum up
+              Zero base.
+              Default is 0
+</pre>
+
+<p>Example: </p>
+
+</pre>
+
+   df -m | col_sum +3
+
+</pre>
+
+Sum available diskspace across all drives in MB.
+
+<pre>
+
+   grep -c class *.py | cut -d':' -f2 | col_sum
+
+</pre>
+
+Count number of classes all python programs:
+
 
 For wider screens     
 
