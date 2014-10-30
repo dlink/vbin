@@ -1,0 +1,24 @@
+# "Take" lines from "FROM" to "TO" from a given file.
+# eq.
+#     # the following returns 10 lines (11, ..., 20)
+#     cat books.csv | take 10 20   
+
+
+# check num args
+if [ "$#" -ne 2 ]; then
+    echo "take error: Two arguments required"
+    exit 1
+fi
+
+
+from=$1
+to=$2
+
+# check is number
+re='^[0-9]+$'
+if ! [[ $from =~ $re ]] ; then
+    echo "take error: Number arguments only"
+    exit 1
+fi
+
+head -$to | tail -$(($to-$from+1))
