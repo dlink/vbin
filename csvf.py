@@ -83,7 +83,7 @@ class CSV(object):
             if self.file == '-':
                 self._fp = sys.stdin
             else:
-                self._fp = open(self.file, 'r')
+                self._fp = open(self.file, 'rU')
         return self._fp;
     
     @property
