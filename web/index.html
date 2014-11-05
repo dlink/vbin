@@ -16,32 +16,32 @@
 
 <div id="topics">
 <p>Topics</p>
+
 <p>10/27/2014: Not yet fully documented. see github</p>
+
 <table border=1 cellpadding=1 cellspacing=0>
    <tr>
       <td><a href="#installHelp" class="simpleLink">Installation</a></td>
       <td><a href="#clipHelp" class="simpleLink">clip</a></td>
       <td><a href="#col_sumHelp" class="simpleLink">col_sum</a></td>
+      <td><a href="#csvHelp" class="simpleLink">csv</a></td>
       <td><a href="#lsheadHelp" class="simpleLink">lshead</a></td>
       <td><a href="#psgrepHelp" class="simpleLink">psgrep</a></td>
       <td><a href="#revverHelp" class="simpleLink">revver</a></td>
-      <td><a href="#savHelp" class="simpleLink">sav</a></td>
-      <td><a href="#savdiffHelp" class="simpleLink">savdiff</a></td>
    <tr>
    </tr>
+      <td><a href="#savHelp" class="simpleLink">sav</a></td>
+      <td><a href="#savdiffHelp" class="simpleLink">savdiff</a></td>
       <td><a href="#takeHelp" class="simpleLink">take</a></td>
       <td><a href="#t2cHelp" class="simpleLink">t2c</a></td>
       <td><a href="#unsavHelp" class="simpleLink">unsav</a></td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
    </tr>
 </table>
 </div>
 
-<hr>
+<!-- hr -->
 
 <!-- install ----------------------------------------->
 
@@ -171,6 +171,98 @@ For wider screens
 
    $ cat log | clip long      # show first long page, ie. cut -c1-158
    $ cat log | clip long 2    # show second long page, ie. cut -c159-316
+
+</pre>
+
+
+See, Also:
+
+<a href="#topics">topics</a>, <a href="#csvHelp">csv</a>
+<hr>
+<!-- csv --------------------------------------------->
+
+<div id="csvHelp">
+<h4>csv</h4>
+<p>csv file utility.  Process a csv file, treating it like a database table.</p>
+
+<pre class="syntax">
+
+   csv [OPTIONS] &lt;filename&gt;
+   csv [OPTIONS] -
+
+   optional arguments:
+     -               Treat &ltSTDIN&gt; instead of &ltfilename&gt;
+     -h, --help      show this help message and exit
+     -c &lt;colspec&gt;    List or range of column numbers.  
+                     They can be in any order.  Eq.: 2,1,4-6
+     -d &lt;delimiter&gt;  Set delimiter. Default is comma (,)
+     -p              Pretty-Print output
+     -s              show column headers
+
+</pre>
+
+<p>Example: </p>
+
+Show file header
+
+<pre>
+
+   $ csv -s books.csv 
+   1. id
+   2. isbn
+   3. name
+   4. publicated
+   5. type
+
+</pre>
+
+List out contents in pretty form:
+
+<pre>
+   id, isbn,          name,                                    publicated, type
+   1,  9781557427960, The Picture of Dorian Gray,              1891,       Novel
+   2,  9780140283297, On the Road,                             1957,       Novel
+   3,  9781851243969, Frankenstein; or, The Modern Prometheus, 1818,       Novel
+   4,  9780345347954, Childhood's End,                         1966,       Novel
+   5,  9780451457998, A Clockwork Orange,                      1962,       Novel
+   6,  9780440184621, Tai-Pan,                                 1982,       Novel
+   7,  9780486266848, Another Turn of the Screw,               1898,       Novel
+   8,  9780486280615, Adventures of Huckleberry Finn,          1884,       Novel
+   9,  9780143104889, A Princess of Mars,                      1917,       Novel
+   13, 9781614270621, The Prophet,                             1923,       Poetry
+   21, 9780374528379, Brothers Karamazov,                      1880,       Novel
+
+</pre>
+
+List published and name where publication in the 1800s
+<pre>
+
+   $ csv -c4,3 books.csv |grep ^18 |sort -n
+   1818,Frankenstein; or, The Modern Prometheus
+   1880,Brothers Karamazov
+   1884,Adventures of Huckleberry Finn
+   1891,The Picture of Dorian Gray
+   1898,Another Turn of the Screw
+
+</pre>
+
+List certain columns in pretty format:
+
+<pre>
+
+   $ csv -c2,3,5 books.csv -p
+   isbn,          name,                                    type
+   9781557427960, The Picture of Dorian Gray,              Novel
+   9780140283297, On the Road,                             Novel
+   9781851243969, Frankenstein; or, The Modern Prometheus, Novel
+   9780345347954, Childhood's End,                         Novel
+   9780451457998, A Clockwork Orange,                      Novel
+   9780440184621, Tai-Pan,                                 Novel
+   9780486266848, Another Turn of the Screw,               Novel
+   9780486280615, Adventures of Huckleberry Finn,          Novel
+   9780143104889, A Princess of Mars,                      Novel
+   9781614270621, The Prophet,                             Poetry
+   9780374528379, Brothers Karamazov,                      Novel
 
 </pre>
 

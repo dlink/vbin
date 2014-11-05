@@ -76,26 +76,6 @@ Commands Listing
 
 DETAIL DESCRIPTIONS
 ===================
-* col_sum 
-
-  Add up a column of numbers
-
-  Syntax:
-     col_sum [ <col_num> ]
-
-      col_num - zero based.
-                Default is 0.
-
-  Example:
-
-     Sum available diskspace across all drives in MB.
-
-        df -m | col_sum +3
-
-     Count number of classes all python programs: 
-    
-        grep -c class *.py | cut -d':' -f2 | col_sum
-
 
 * fwk_usage
 
