@@ -2,8 +2,9 @@
 
 import sys
 import re
+import copy
 
-def sql_pretty(sql, html=False):
+def sql_pretty(sql, lowercase_kw=False, html=False):
     # Line break and color code:
     keywords = ['select', 'from', 'where', 'order by', 'group by',
                 'having', 'limit', 'insert into', 'values']
@@ -12,9 +13,9 @@ def sql_pretty(sql, html=False):
     # Color code only:
     keywords3 = ['as', 'coalesce', 'on', 'or', 'then']
 
-    keywords += [k.upper() for k in keywords]
-    keywords2 += [k.upper() for k in keywords2]
-    keywords3 += [k.upper() for k in keywords3]
+    #keywords += [k.upper() for k in keywords]
+    #keywords2 += [k.upper() for k in keywords2]
+    #keywords3 += [k.upper() for k in keywords3]
 
     if html:
         indent = '&nbsp;' * 3
@@ -31,17 +32,20 @@ def sql_pretty(sql, html=False):
 
     sql = re.sub(r'\s+', ' ', sql)
     for k in keywords:
+        k2 = k if lowercase_kw else '\\1'
         sql = re.sub(r'\b(%s)\s+' % k,
-                     r'%s%s\1%s%s%s' % (nl, f1, f2, nl, indent),
-                     sql)
+                     r'%s%s%s%s%s%s' % (nl, f1, k2, f2, nl, indent),
+                     sql, 0, re.IGNORECASE)
     for k in keywords2:
+        k2 = k if lowercase_kw else '\\1'
         sql = re.sub(r'\b(%s)\s+' % k,
-                     r'%s%s%s\1%s ' % (nl, indent, f1b, f2),
-                     sql)
+                     r'%s%s%s%s%s ' % (nl, indent, f1b, k2, f2),
+                     sql, 0, re.IGNORECASE)
     for k in keywords3:
+        k2 = k if lowercase_kw else '\\1'
         sql = re.sub(r'\b(%s)\s+' % k,
-                     r'%s\1%s ' % (f1b, f2),
-                     sql)
+                     r'%s%s%s ' % (f1b, k2, f2),
+                     sql, 0, re.IGNORECASE)
 
     # Second pass - indent subqueries
     # (To really do this correctly we need a full sql parse)
@@ -59,18 +63,35 @@ def sql_pretty(sql, html=False):
 
 def syntax():
     print
-    print "   sql_pretty <filename> [html]"
+    print "   sql_pretty [OPTIONS] <filename>"
+    print
+    print "       OPTIONS: -l  - lowercase keywords"
+    print "                -h  - HTML Output"
     print
     sys.exit(1)
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        syntax()
+    args = copy.copy(sys.argv)
 
-    filename = sys.argv[1]
+    # options
+    lowercase_kw = False
+    if '-l' in args:
+        lowercase_kw = True
+        pos = args.index('-l')
+        args = args[0:pos] + args[pos+1:]
 
     html = False
-    if len(sys.argv) > 2 and sys.argv[2].lower() == 'html':
+    if '-h' in args:
         html = True
+        pos = args.index('-h')
+        args = args[0:pos] + args[pos+1:]
 
-    print sql_pretty(open(filename, 'r').read(), html)
+
+    if len(args) < 2:
+        syntax()
+
+    filename = args[1]
+    print sql_pretty(open(filename, 'r').read(),
+                     lowercase_kw=lowercase_kw,
+                     html=html)
+
