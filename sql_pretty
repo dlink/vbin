@@ -18,7 +18,7 @@ def sql_pretty(sql, html=False):
 
     if html:
         indent = '&nbsp;' * 3
-        nl = '<br \>'
+        nl = '<br \>\n'
         f1 = "<font color='blue'>"
         f1b= "<font color='green'>"
         f2 = '</font>'
