@@ -39,6 +39,14 @@
       <td>&nbsp;</td>
    </tr>
 </table>
+
+<p>SQL Utilities</p>
+
+<table border=1 cellpadding=1 cellspacing=0>
+   <tr>
+      <td><a href="#sql_prettyHelp" class="simpleLink">sql_pretty</a></td>
+   </tr>
+</table>
 </div>
 
 <!-- hr -->
@@ -348,6 +356,47 @@ The command will aways return your current process, as well.
 
 </pre>
 <p>No, but he's running some daemons.</p>
+
+See, Also:
+
+<a href="#topics">topics</a>
+<hr>
+
+
+<!-- sql_pretty -------------------------------------->
+
+<div id="sql_prettyHelp">
+<h4>sql_pretty</h4>
+Format SQL statements nicely.
+
+<pre class="syntax">
+
+   sql_pretty [OPTIONS] <filename>
+
+       OPTIONS: -l  - lowercase keywords
+                -h  - HTML Output
+
+</pre>
+
+<p>Examples:</p>
+
+Here is a query that lists Countries and their number of large population Cities:
+<pre>
+
+   $ sql_pretty country_cities_by_population.sql
+   select
+      co.name as country, count(*) as count
+   from
+      City ci
+      join Country co on ci.CountryCode = co.Code
+   where
+      ci.population > 5000000
+   group by
+      1
+   order by
+      2 desc;
+
+</pre>
 
 See, Also:
 
