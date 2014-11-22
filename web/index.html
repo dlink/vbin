@@ -45,8 +45,8 @@
 <table border=1 cellpadding=1 cellspacing=0>
    <tr>
       <td><a href="#sql_utilities" class="simpleLink">Usage Intro</a></td>
+      <td><a href="#descHelp" class="simpleLink">desc</a></td>
       <td><a href="#sql_prettyHelp" class="simpleLink">sql_pretty</a></td>
-      <td><a href="#tallyHelp" class="simpleLink">tally</a></td>
    </tr>
 </table>
 </div>
@@ -362,47 +362,7 @@ The command will aways return your current process, as well.
 See, Also:
 
 <a href="#topics">topics</a>
-<hr>
 
-
-<!-- sql_pretty -------------------------------------->
-
-<div id="sql_prettyHelp">
-<h4>sql_pretty</h4>
-Format SQL statements nicely.
-
-<pre class="syntax">
-
-   sql_pretty [OPTIONS] <filename>
-
-       OPTIONS: -l  - lowercase keywords
-                -h  - HTML Output
-
-</pre>
-
-<p>Examples:</p>
-
-Here is a query that lists Countries and their number of large population Cities:
-<pre>
-
-   $ sql_pretty country_cities_by_population.sql
-   select
-      co.name as country, count(*) as count
-   from
-      City ci
-      join Country co on ci.CountryCode = co.Code
-   where
-      ci.population > 5000000
-   group by
-      1
-   order by
-      2 desc;
-
-</pre>
-
-See, Also:
-
-<a href="#topics">topics</a>
 <hr>
 
 <!-- revver ------------------------------------------>
@@ -704,24 +664,24 @@ You man need to install the mysql client.  You can get more information about on
 <p>
 To get Schema related information about your data see: <p>
 <p>&nbsp; &nbsp;
-<a href="descHelp">desc</a>,
-<a href="fk_usageHelp">fk_usage</a>.
-<a href="show_createHelp">show_create</a>,
-<a href="show_indexesHelp">show_indexes</a>,
-<a href="show_tablesHelp">show_tables</a>
+<a href="#descHelp">desc</a>,
+<a href="#fk_usageHelp">fk_usage</a>.
+<a href="#show_createHelp">show_create</a>,
+<a href="#show_indexesHelp">show_indexes</a>,
+<a href="#show_tablesHelp">show_tables</a>
 
 
 <p>
 To query your data see: </p>
 <p>&nbsp; &nbsp;
-<a href="countHelp">count</a>,
-<a href="count_distinctHelp">count_distinct</a>,
-<a href="select5Help">select5</a>,
-<a href="selectallHelp">selectall</a>,
-<a href="selectmaxHelp">selectmax</a>,
-<a href="selectminHelp">selectmin</a>,
-<a href="selectsomeHelp">selectsome</a>,
-<a href="tallyHelp">tally</a>
+<a href="#countHelp">count</a>,
+<a href="#count_distinctHelp">count_distinct</a>,
+<a href="#select5Help">select5</a>,
+<a href="#selectallHelp">selectall</a>,
+<a href="#selectmaxHelp">selectmax</a>,
+<a href="#selectminHelp">selectmin</a>,
+<a href="#selectsomeHelp">selectsome</a>,
+<a href="#tallyHelp">tally</a>
 </p>
 
 <p>Miscellaneous: <p>
@@ -729,9 +689,94 @@ To query your data see: </p>
 <a href="explainHelp">explain</a>.
 <a href="sql_prettyHelp">sql_pretty</a>.
 
-
-
 </div>
+
+<hr>
+<!-- desc------ -------------------------------------->
+
+<div id="descHelp">
+<h4>desc</h4>
+<p>Run the mysql <i>description</i> command for given table.<p>
+
+<pre class="syntax">
+
+   dev &lt;filename&gt;
+
+</pre>
+
+<p>Examples:</p>
+
+<pre>
+
+   $ desc pages | vpicsdb -t
+
++--------------+------------------+------+-----+-------------------+-----------------------------+
+| Field        | Type             | Null | Key | Default           | Extra                       |
++--------------+------------------+------+-----+-------------------+-----------------------------+
+| page_id      | int(10) unsigned | NO   | PRI | NULL              | auto_increment              |
+| name         | varchar(30)      | NO   | UNI | NULL              |                             |
+| last_updated | timestamp        | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
+| created      | datetime         | YES  |     | NULL              |                             |
++--------------+------------------+------+-----+-------------------+-----------------------------+
+
+</pre>
+
+<p>What date columns are in this table?</p>
+
+<pre>
+
+   $ desc providers | devdb | grep -i date
+
+   start_dated &nbsp; datetime &nbsp; YES &nbsp;  &nbsp; NULL &nbsp; 
+   last_updated &nbsp; timestamp &nbsp; NO &nbsp;  &nbsp; CURRENT_TIMESTAMP &nbsp; on update CURRENT_TIMESTAMP
+   created &nbsp; datetime &nbsp; YES &nbsp;  &nbsp; NULL &nbsp; 
+
+</pre>
+
+See, Also:
+
+<a href="#sql_utilities">SQL Utils Intro</a>, <a href="#topics">topics</a>
+
+
+<hr>
+<!-- sql_pretty -------------------------------------->
+
+<div id="sql_prettyHelp">
+<h4>sql_pretty</h4>
+Format SQL statements nicely.
+
+<pre class="syntax">
+
+   sql_pretty [OPTIONS] &lt;filename&gt;
+
+       OPTIONS: -l  - lowercase keywords
+                -h  - HTML Output
+
+</pre>
+
+<p>Examples:</p>
+
+Here is a query that lists Countries and their number of large population Cities:
+<pre>
+
+   $ sql_pretty country_cities_by_population.sql
+   select
+      co.name as country, count(*) as count
+   from
+      City ci
+      join Country co on ci.CountryCode = co.Code
+   where
+      ci.population > 5000000
+   group by
+      1
+   order by
+      2 desc;
+
+</pre>
+
+See, Also:
+
+<a href="#topics">topics</a>
 
 <br/>&nbsp;
 <br/>&nbsp;
