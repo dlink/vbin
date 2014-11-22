@@ -44,7 +44,9 @@
 
 <table border=1 cellpadding=1 cellspacing=0>
    <tr>
+      <td><a href="#sql_utilities" class="simpleLink">Usage Intro</a></td>
       <td><a href="#sql_prettyHelp" class="simpleLink">sql_pretty</a></td>
+      <td><a href="#tallyHelp" class="simpleLink">tally</a></td>
    </tr>
 </table>
 </div>
@@ -571,7 +573,168 @@ See, Also:
 
 
 
+<hr>
+<h1 id="sql_utilities">SQL Utilities</h1>
+
+<!-- SQL Util Intro ---------------------------------->
+
+<div id="sql_utils_intro">
+<h4>SQL Utilities Intro</h4>
+
+<p>The main idea of these utilities is to be able work in SQL on the Unix command Line.</p>
+
+<p>
+Unix Command Line + SQL = Unbeatable Data Analysis and Data Discovery.
+</p>
+
+
+The main idea is to be able to pass sql command directly to your databases on the command line.
+
+<p>Like this:<p>
+
+<pre>
+
+   echo "select * from books where book_id = 5 \G" | devdb -t
+
+</pre>
+
+<p>And like this:</p>
+
+<pre>
+
+   cat books.sql | devdb -t
+
+</pre>
+
+&nbsp;<br/>
+
+<h5>Database Aliases</h5>
+<p>
+First you must setup a set of aliases to your database connections.  You can put this in a file called ~/bin/database_aliases.sh.  And then source it in your ~/.bash_profile.
+</p>
+<p>
+Something like this:
+</p>
+
+<pre>
+/home/dlink/bin/database_aliases.sh:
+
+   alias devdb='mysql -udlink -pbojangles -hlocalhost --database=library'
+   alias stagedb='mysql -uzimuser -psecrete -hstagedb.acme.com --database=library'
+   alias proddb='mysql -uzimuser -psecrete -hdb01.izimbra.com --database=library'
+   alias proddbro='mysql -uzimuser -psecrete -hdb02.izimbra.com --database=library'
+
+</pre>
+
+<p>
+You man need to install the mysql client.  You can get more information about on the <a href="http://dev.mysql.com/doc/refman/5.6/en/mysql.html">MySQL Command-Line Tool Page</a>.</p>
+
+<p>Notice the use of --database=&lt;databasename&gt; rather then simply &lt;databasename&gt. Both work, but the first one allows us to tack other options on the end like <i>-t</i> (table format output).
+
+&nbsp;<br/>
+
+<h5>Putting it to use</h5>
+<p>Now we can go to work exploring our database. Here are some examples:</p>
+
+<p>1. What tables are there in the database?</p>
+<pre>
+   $ show_tables | devdb -t
+</pre>
+
+<p>2. Is the status table singluar or plural?</p>
+<pre>
+   $ show_tables | devdb |grep -i status
+</pre>
+
+<p>3. What fields are in the books table?</p>
+<pre>
+   $ desc books | devdb -t
+</pre>
+
+<p>4. How many authors records are there?<p>
+<pre>
+   $ count authors | devdb -t
+</pre>
+
+<p>5. Show me one record from the books table</p>
+<pre>
+   $ selectsome books id 10 | devdb -t
+</pre>
+
+<p>6. What's the greatest id in the books table?<p>
+<pre>
+   $ selectmax books id | devdb -t
+</pre>
+
+<p>7. Put all the status data into a csv file</p>
+<pre>
+   $ selectall statuses | devdb | t2c > statuses.csv
+</pre>
+
+<p>8. Show me a frequency histogram of which status_ids are used most frequently in the books table</p>
+<pre>
+  $ tally books status_id | devdb -t
+</pre>
+
+<p>9. What indexes does the books table have?</p>
+<pre>
+  $ show_indexes books | devdb -t
+</pre>
+
+<p>10. What constraints does the books table have?</p>
+<pre>
+  $ show_create books | devdb -t
+</pre>
+
+<p>11. Why is this query so slow?<p>
+<pre>
+  $ explain customers_by_provider.sql | proddb -t
+</pre>
+
+<p>12x. What tables have foreign key references to the authors table?</p>
+<pre>
+  $ fk_usage library authors | devdb -t
+</pre>
+
+
+&nbsp;<br/>
+
+<h5>Classes of SQL Utilities</h5>
+
+<p>
+To get Schema related information about your data see: <p>
+<p>&nbsp; &nbsp;
+<a href="descHelp">desc</a>,
+<a href="fk_usageHelp">fk_usage</a>.
+<a href="show_createHelp">show_create</a>,
+<a href="show_indexesHelp">show_indexes</a>,
+<a href="show_tablesHelp">show_tables</a>
+
+
+<p>
+To query your data see: </p>
+<p>&nbsp; &nbsp;
+<a href="countHelp">count</a>,
+<a href="count_distinctHelp">count_distinct</a>,
+<a href="select5Help">select5</a>,
+<a href="selectallHelp">selectall</a>,
+<a href="selectmaxHelp">selectmax</a>,
+<a href="selectminHelp">selectmin</a>,
+<a href="selectsomeHelp">selectsome</a>,
+<a href="tallyHelp">tally</a>
+</p>
+
+<p>Miscellaneous: <p>
+<p>&nbsp; &nbsp;
+<a href="explainHelp">explain</a>.
+<a href="sql_prettyHelp">sql_pretty</a>.
+
+
 
 </div>
+
+<br/>&nbsp;
+<br/>&nbsp;
+
 
 </body>
