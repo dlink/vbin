@@ -1,0 +1,18 @@
+#!/usr/bin/env python
+
+from os.path import expanduser
+home = expanduser("~")
+
+alias = raw_input(" Please provide the database alias you want to use: ")
+host = raw_input(" Please provide the database host you want to use: ")
+user = raw_input( " Please provide the database user you want to use: ")
+password = raw_input(" Please provide the database password you want to use: ")
+#port = raw_input( " Please provide the database port you want to use: ")
+
+alias_string =  "alias %s='mysql --user %s --password %s  --host %s '\n" % (alias, user, password, host)
+
+fh = open(home + '/.bash_aliases', 'a')
+fh.write(alias_string)
+fh.close()
+
+print alias_string + ' added to your .bash_aliases file'
