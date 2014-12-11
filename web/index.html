@@ -717,12 +717,31 @@ To query your data see: </p>
 +-------+
 |    69 |
 +-------+
+
 </pre>
 
+<p>Create a list of all database tables and their row counts:</p>
+
+<pre>
+
+   $ show_tables | vrdb | grep -v Tables | \
+   >    while read t; do echo -n "$t: "; count $t | vrdb | grep -v count ;  done
+
+   City: 4079
+   Country: 239
+   CountryLanguage: 984
+   authors: 10
+   book_authors: 11
+   book_genres: 22
+   books: 25
+   countries: 3
+   genres: 17
+
+</pre>
 
 See, Also:
 
-<a href="#sql_utilities">SQL Utils Intro</a>, <a href="#topics">topics</a>
+<a href="#sql_utilities">SQL Utils Intro</a>, <a href="#topics">topics</a>, <a href="#show_tables">show_tables</a>
 
 
 <hr>
