@@ -3,11 +3,11 @@
 from os.path import expanduser
 from shutil import copyfile
 
-def default_input( message, default_value ):
+def default_input( message, default_value="" ):
     if default_value:
-        return default_input( "%s [%s]:" % (message,default_value) ) or default_value
+        return raw_input( "%s [%s]:" % (message,default_value) ) or default_value
     else:
-        return default_input( "%s " % (message) )
+        return raw_input( "%s " % (message) )
 
 home = expanduser("~")
 #TODO: Provide alternative files like zsh_aliases or allow user to pass it in with a flag
@@ -16,17 +16,17 @@ filepath = home + '/' + filename
 
 print 'This command will create an alias for a mysql connection in %s.' % (filepath)
 
-alias = default_input(" Please provide the database alias you want to use: ", "db01")
-host = default_input(" Please provide the database host you want to use: ", "localhost")
-user = default_input( " Please provide the database user you want to use: ", "root")
-password = default_input(" Please provide the database password you want to use: ")
-#port = default_input( " Please provide the database port you want to use: ", 3306)
+alias = default_input(" Please provide the database alias you want to use:", "db01")
+host = default_input(" Please provide the database host you want to use:", "localhost")
+user = default_input( " Please provide the database user you want to use:", "root")
+password = default_input(" Please provide the database password you want to use:")
+#port = default_input( " Please provide the database port you want to use:", 3306)
 
 print "Backing up %s to %s.bak" % (filepath, filepath )
 copyfile(filepath, filepath + '.bak')
 
 #use the long versions so that it's more readable
-alias_string =  "alias %s='mysql --user=%s --password=%s  --host=%s '" % (alias, user, password, host)
+alias_string =  "alias %s='mysql --user=%s --password=%s  --host=%s'" % (alias, user, password, host)
 
 fh = open(filepath, 'a')
 fh.write(alias_string)
