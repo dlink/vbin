@@ -16,7 +16,8 @@ password = raw_input(" Please provide the database password you want to use: ")
 print "Backing up %s to %s.bak" % (filename, filename )
 copyfile(filename, filename + '.bak')
 
-alias_string =  "alias %s='mysql --user %s --password %s  --host %s '\n" % (alias, user, password, host)
+#use the long versions so that it's more readable
+alias_string =  "alias %s='mysql --user=%s --password=%s  --host=%s '\n" % (alias, user, password, host)
 
 fh = open(home + '/' + filename, 'a')
 fh.write(alias_string)
