@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 
 from os.path import expanduser
+from shutil import copyfile
 home = expanduser("~")
+
+#TODO: Provide alternative files like zsh_aliases or allow user to pass it in with a flag
+filename = '.bash_aliases'
 
 alias = raw_input(" Please provide the database alias you want to use: ")
 host = raw_input(" Please provide the database host you want to use: ")
@@ -9,9 +13,12 @@ user = raw_input( " Please provide the database user you want to use: ")
 password = raw_input(" Please provide the database password you want to use: ")
 #port = raw_input( " Please provide the database port you want to use: ")
 
+print "Backing up %s to %s.bak" % (filename, filename )
+copyfile(filename, filename + '.bak')
+
 alias_string =  "alias %s='mysql --user %s --password %s  --host %s '\n" % (alias, user, password, host)
 
-fh = open(home + '/.bash_aliases', 'a')
+fh = open(home + '/' + filename, 'a')
 fh.write(alias_string)
 fh.close()
 
