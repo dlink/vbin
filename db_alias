@@ -20,7 +20,7 @@ print "Backing up %s to %s.bak" % (filepath, filepath )
 copyfile(filepath, filepath + '.bak')
 
 #use the long versions so that it's more readable
-alias_string =  "alias %s='mysql --user=%s --password=%s  --host=%s '\n" % (alias, user, password, host)
+alias_string =  "alias %s='mysql --user=%s --password=%s  --host=%s '" % (alias, user, password, host)
 
 fh = open(filepath, 'a')
 fh.write(alias_string)
