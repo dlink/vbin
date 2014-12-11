@@ -45,6 +45,7 @@
 <table border=1 cellpadding=1 cellspacing=0>
    <tr>
       <td><a href="#sql_utilities" class="simpleLink">Usage Intro</a></td>
+      <td><a href="#countHelp" class="simpleLink">count</a></td>
       <td><a href="#descHelp" class="simpleLink">desc</a></td>
       <td><a href="#sql_prettyHelp" class="simpleLink">sql_pretty</a></td>
    </tr>
@@ -692,7 +693,40 @@ To query your data see: </p>
 </div>
 
 <hr>
-<!-- desc------ -------------------------------------->
+
+<!-- count ------------------------------------------->
+
+<div id="countHelp">
+<h4>count</h4>
+<p>Return the count, or number of records for a given table</p>
+
+<pre class="syntax">
+
+   count &lt;filename&gt;
+
+</pre>
+
+<p>Examples:</p>
+
+<pre>
+
+   $ count pics|vpicsdb  -t
+
++-------+
+| count |
++-------+
+|    69 |
++-------+
+</pre>
+
+
+See, Also:
+
+<a href="#sql_utilities">SQL Utils Intro</a>, <a href="#topics">topics</a>
+
+
+<hr>
+<!-- desc -------------------------------------------->
 
 <div id="descHelp">
 <h4>desc</h4>
