@@ -42,11 +42,13 @@
 
 <p>SQL Utilities</p>
 
+<p>12/18/2014: Not yet fully documented. see github</p>
 <table border=1 cellpadding=1 cellspacing=0>
    <tr>
       <td><a href="#sql_utilities" class="simpleLink">Usage Intro</a></td>
       <td><a href="#countHelp" class="simpleLink">count</a></td>
       <td><a href="#descHelp" class="simpleLink">desc</a></td>
+      <td><a href="#show_tablesHelp" class="simpleLink">show_tables</a></td>
       <td><a href="#sql_prettyHelp" class="simpleLink">sql_pretty</a></td>
    </tr>
 </table>
@@ -589,7 +591,7 @@ Something like this:
 </pre>
 
 <p>
-You man need to install the mysql client.  You can get more information about on the <a href="http://dev.mysql.com/doc/refman/5.6/en/mysql.html">MySQL Command-Line Tool Page</a>.</p>
+You may need to install the mysql client.  You can get more information about on the <a href="http://dev.mysql.com/doc/refman/5.6/en/mysql.html">MySQL Command-Line Tool Page</a>.</p>
 
 <p>Notice the use of --database=&lt;databasename&gt; rather then simply &lt;databasename&gt. Both work, but the first one allows us to tack other options on the end like <i>-t</i> (table format output).
 
@@ -653,7 +655,7 @@ You man need to install the mysql client.  You can get more information about on
   $ explain customers_by_provider.sql | proddb -t
 </pre>
 
-<p>12x. What tables have foreign key references to the authors table?</p>
+<p>12. What tables have foreign key references to the authors table?</p>
 <pre>
   $ fk_usage library authors | devdb -t
 </pre>
@@ -784,6 +786,62 @@ See, Also:
    start_dated &nbsp; datetime &nbsp; YES &nbsp;  &nbsp; NULL &nbsp; 
    last_updated &nbsp; timestamp &nbsp; NO &nbsp;  &nbsp; CURRENT_TIMESTAMP &nbsp; on update CURRENT_TIMESTAMP
    created &nbsp; datetime &nbsp; YES &nbsp;  &nbsp; NULL &nbsp; 
+
+</pre>
+
+See, Also:
+
+<a href="#sql_utilities">SQL Utils Intro</a>, <a href="#topics">topics</a>
+
+
+<hr>
+<!-- show_tables ------------------------------------->
+
+<div id="show_tablesHelp">
+<h4>show_tables</h4>
+<p>Run the mysql <i>show tables</i> command.<p>
+
+<pre class="syntax">
+
+   show_tables
+
+</pre>
+
+<p>Examples:</p>
+
+<pre>
+
+   $ show_tables | wpdb -t
+
++-----------------------+
+| Tables_in_wordpress   |
++-----------------------+
+| wp_commentmeta        |
+| wp_comments           |
+| wp_links              |
+| wp_options            |
+| wp_postmeta           |
+| wp_posts              |
+| wp_term_relationships |
+| wp_term_taxonomy      |
+| wp_terms              |
+| wp_usermeta           |
+| wp_users              |
++-----------------------+
+11 rows in set (0.00 sec)
+
+</pre>
+
+<br/>
+<p>What is the exact spelling of the status tables?
+
+<pre>
+
+   $ show_tables | nadb -t | grep -i status
+
+customer_statuses
+order_statues
+statuses
 
 </pre>
 
