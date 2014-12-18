@@ -1,6 +1,6 @@
 body {
    margin: 20px 200px;
-   font-size: 0.8em;
+   font-size: 16px;
    background-color: white;
    width: 700px;
 }
@@ -8,13 +8,12 @@ h4 {
    margin-top: 50px;
 }
 pre {
-   font-size: 1.2em;
-   background-color: #E2E2E6; /* lightgrey; */
+   color: #006699;
+   background-color: #f3f7f8;
 }
 pre.syntax {
-   font-size: 1.4em;
    font-weight: bold;
-   background-color: #DBFFB8; /* #CCFF99; light green; */
+   background-color: #dbffc8; /* #CCFF99; light green; */
 }
 
 td {
