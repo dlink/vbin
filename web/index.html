@@ -48,6 +48,7 @@
       <td><a href="#sql_utilities" class="simpleLink">Usage Intro</a></td>
       <td><a href="#countHelp" class="simpleLink">count</a></td>
       <td><a href="#descHelp" class="simpleLink">desc</a></td>
+      <td><a href="#selectallHelp" class="simpleLink">selectall</a></td>
       <td><a href="#show_tablesHelp" class="simpleLink">show_tables</a></td>
       <td><a href="#sql_prettyHelp" class="simpleLink">sql_pretty</a></td>
    </tr>
@@ -788,6 +789,54 @@ See, Also:
    created &nbsp; datetime &nbsp; YES &nbsp;  &nbsp; NULL &nbsp; 
 
 </pre>
+
+See, Also:
+
+<a href="#sql_utilities">SQL Utils Intro</a>, <a href="#topics">topics</a>
+
+
+<hr>
+<!-- selectall --------------------------------------->
+
+<div id="selectallHelp">
+<h4>selectall</h4>
+<p>Run a <i>select * from</i> command on a given table.<p>
+
+<pre class="syntax">
+
+   selectall &lt;tablename&gt;
+
+</pre>
+
+<p>Examples:</p>
+
+<pre>
+
+   $ selectall genres | vrdb -t
+
++----+-----------------------+
+| id | name                  |
++----+-----------------------+
+|  1 | Philosophical         |
+|  2 | Gothic                |
+|  3 | Speculative           |
+|  4 | Roman à clef         |
+|  5 | Prose Poetry          |
+|  6 | Science Fiction       |
+|  7 | Historical Fiction    |
+|  8 | Romance               |
+|  9 | Horror                |
+| 10 | Novella               |
+| 11 | Ghost story           |
+| 12 | Satire                |
+| 13 | Adventure             |
+| 14 | Children's literature |
+| 15 | Humour                |
+| 16 | Fantasy               |
+| 17 | Sword and planet      |
++----+-----------------------+
+</pre>
+
 
 See, Also:
 
