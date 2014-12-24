@@ -19,7 +19,7 @@
 
 <p>10/27/2014: Not yet fully documented. see github</p>
 
-<table border=1 cellpadding=1 cellspacing=0>
+<table border=1 cellpadding=1 cellspacing=0 width=700px>
    <tr>
       <td><a href="#installHelp" class="simpleLink">Installation</a></td>
       <td><a href="#clipHelp" class="simpleLink">clip</a></td>
@@ -28,8 +28,8 @@
       <td><a href="#lsheadHelp" class="simpleLink">lshead</a></td>
       <td><a href="#psgrepHelp" class="simpleLink">psgrep</a></td>
       <td><a href="#revverHelp" class="simpleLink">revver</a></td>
-   <tr>
    </tr>
+   <tr>
       <td><a href="#savHelp" class="simpleLink">sav</a></td>
       <td><a href="#savdiffHelp" class="simpleLink">savdiff</a></td>
       <td><a href="#takeHelp" class="simpleLink">take</a></td>
@@ -43,14 +43,22 @@
 <p>SQL Utilities</p>
 
 <p>12/18/2014: Not yet fully documented. see github</p>
-<table border=1 cellpadding=1 cellspacing=0>
+<table border=1 cellpadding=1 cellspacing=0 width=700px>
    <tr>
       <td><a href="#sql_utilities" class="simpleLink">Usage Intro</a></td>
       <td><a href="#countHelp" class="simpleLink">count</a></td>
       <td><a href="#descHelp" class="simpleLink">desc</a></td>
+      <td><a href="#explainHelp" class="simpleLink">explain</a></td>
       <td><a href="#selectallHelp" class="simpleLink">selectall</a></td>
       <td><a href="#show_tablesHelp" class="simpleLink">show_tables</a></td>
+   </tr>
+   <tr>
       <td><a href="#sql_prettyHelp" class="simpleLink">sql_pretty</a></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
    </tr>
 </table>
 </div>
@@ -706,7 +714,7 @@ To query your data see: </p>
 
 <pre class="syntax">
 
-   count &lt;filename&gt;
+   count &lt;filename&gt; | &lt;dbalias&gt;
 
 </pre>
 
@@ -749,6 +757,7 @@ See, Also:
 
 
 <hr>
+
 <!-- desc -------------------------------------------->
 
 <div id="descHelp">
@@ -757,7 +766,7 @@ See, Also:
 
 <pre class="syntax">
 
-   dev &lt;filename&gt;
+   desc &lt;tablename&gt; | &lt;dbalias&gt;
 
 </pre>
 
@@ -794,8 +803,44 @@ See, Also:
 
 <a href="#sql_utilities">SQL Utils Intro</a>, <a href="#topics">topics</a>
 
+<hr>
+
+<!-- explain ----------------------------------------->
+
+<div id="explainHelp">
+<h4>explain</h4>
+<p>Run the mysql <i>Explain Plan</i> on a given sql statement.  You run this on an sql query stored in a file.</p>
+
+<pre class="syntax">
+
+   explain &lt;filename&gt; | &lt;dbalias&gt;
+
+</pre>
+
+<p>Examples:</p>
+
+<p>Why is my query slow?  The following Mysql Explain Plan shows that no index is being used on the i2 table</p>
+
+<pre>
+
+   $ explain bad_customers.sql | penergy -t
+
++----+-------------+-------+------+----------------------+------------+---------+-------+----------+----------------------------------------------+
+| id | select_type | table | type | possible_keys        | key        | key_len | ref   | rows     | Extra                                        |
++----+-------------+-------+------+----------------------+------------+---------+-------+----------+----------------------------------------------+
+|  1 | SIMPLE      | i     | ref  | customerId,TransDate | customerId | 5       | const |   392878 | Using where; Using temporary; Using filesort |
+|  1 | SIMPLE      | i2    | ALL  | customerId           | NULL       | NULL    | NULL  | 10225890 | Using where; Using join buffer               |
++----+-------------+-------+------+----------------------+------------+---------+-------+----------+----------------------------------------------+
+
+</pre>
+
+See, Also:
+
+<a href="#sql_utilities">SQL Utils Intro</a>, <a href="#topics">topics</a>
+
 
 <hr>
+
 <!-- selectall --------------------------------------->
 
 <div id="selectallHelp">
@@ -804,7 +849,7 @@ See, Also:
 
 <pre class="syntax">
 
-   selectall &lt;tablename&gt;
+   selectall &lt;tablename&gt; | &lt;dbalias&gt;
 
 </pre>
 
@@ -852,7 +897,7 @@ See, Also:
 
 <pre class="syntax">
 
-   show_tables
+   show_tables | &lt;dbalias&gt;
 
 </pre>
 
