@@ -242,6 +242,7 @@ Show file header
 List out contents in pretty form:
 
 <pre>
+   $ csv -p books.csv
    id, isbn,          name,                                    publicated, type
    1,  9781557427960, The Picture of Dorian Gray,              1891,       Novel
    2,  9780140283297, On the Road,                             1957,       Novel
@@ -257,7 +258,7 @@ List out contents in pretty form:
 
 </pre>
 
-List published and name where publication in the 1800s
+List publication year and book title where publication in the 1800s
 <pre>
 
    $ csv -c4,3 books.csv |grep ^18 |sort -n
@@ -497,24 +498,19 @@ See, Also:
 
 <p>Example:<p>
 
-
-# eq.
-#     # the following returns 10 lines (11, ..., 20)
-#     cat books.csv | take 10 20   
-
+<p>Returns 1000 lines from ids.csv from 1001 to 2000</p>
 <pre>
 
    $ cat ids.csv | take 1001 2000
 
 </pre>
-<p>The above returns 1000 lines from ids.csv (lines 1001, ..., 2000)</p>
 
+<p>Display and processes the second set of 1000 ids</p>
 <pre>
 
    $ cat ids.csv | take 1000 2000 | while read i; do echo $i ; ./myprocess.py $i ; done
 
 </pre>
-<p>The above displays and processes each id returned from take.</p>
 
 
 <a href="#topics">topics</a>
