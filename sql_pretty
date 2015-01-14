@@ -4,18 +4,19 @@ import sys
 import re
 import copy
 
-def sql_pretty(sql, lowercase_kw=False, html=False):
-    # Line break and color code:
+def sql_pretty(sql, lowercase_kw=True, html=False):
+    '''Return formated SQL String'''
+
+    # Line break and color code 1:
     keywords = ['select', 'from', 'where', 'order by', 'group by',
                 'having', 'limit', 'insert into', 'values']
-    # Line break with indentation and color code:
-    keywords2 = ['and', 'case', 'else', 'end', 'left join', 'join', 'when']
-    # Color code only:
-    keywords3 = ['as', 'coalesce', 'on', 'or', 'then']
 
-    #keywords += [k.upper() for k in keywords]
-    #keywords2 += [k.upper() for k in keywords2]
-    #keywords3 += [k.upper() for k in keywords3]
+    # Line break and color code 1:
+    keywords2  = ['and', 'case', 'else', 'end', 'when']
+    keywords2b = [r'(left |right )?(inner |outer )?join',]
+
+    # Color code only 3:
+    keywords3 = ['as', 'coalesce', 'on', 'or', 'then']
 
     if html:
         indent = '&nbsp;' * 3
@@ -29,17 +30,21 @@ def sql_pretty(sql, lowercase_kw=False, html=False):
         f1 = ''
         f1b= ''
         f2 = ''
-
+        
     sql = re.sub(r'\s+', ' ', sql)
     for k in keywords:
         k2 = k if lowercase_kw else '\\1'
-        sql = re.sub(r'\b(%s)\s+' % k,
+        sql = re.sub(r'\s*\b(%s)\s+' % k,
                      r'%s%s%s%s%s%s' % (nl, f1, k2, f2, nl, indent),
                      sql, 0, re.IGNORECASE)
     for k in keywords2:
         k2 = k if lowercase_kw else '\\1'
         sql = re.sub(r'\b(%s)\s+' % k,
                      r'%s%s%s%s%s ' % (nl, indent, f1b, k2, f2),
+                     sql, 0, re.IGNORECASE)
+    for k in keywords2b:
+        sql = re.sub(r'\b(%s)\s+' % k,
+                     r'%s%s%s\1%s ' % (nl, indent, f1b, f2),
                      sql, 0, re.IGNORECASE)
     for k in keywords3:
         k2 = k if lowercase_kw else '\\1'
@@ -52,10 +57,13 @@ def sql_pretty(sql, lowercase_kw=False, html=False):
     sql2 = ''
     ind = ''
     for i, x in enumerate(sql.split(nl)):
+        # Remove blank line from the top
+        if i == 0 and x == '':
+            continue
         # Start indenting after the second SELECT
         if 'select' in x and i > 1:
             ind = indent*2
-        sql2 += '%s%s%s' % (ind, x, nl)
+        sql2 += '%s%s%s' % (ind, x.rstrip(), nl)
         # Stop indenting after the join's ON statement (hokey I know)
         if re.search(r'\) %sas%s \w+ %son%s' % (f1b, f2, f1b, f2), x):
             ind = ''
@@ -65,8 +73,7 @@ def syntax():
     print
     print "   sql_pretty [OPTIONS] <filename>"
     print
-    print "       OPTIONS: -l  - lowercase keywords"
-    print "                -h  - HTML Output"
+    print "       OPTIONS: -h  - HTML Output"
     print
     sys.exit(1)
 
@@ -74,11 +81,11 @@ if __name__ == '__main__':
     args = copy.copy(sys.argv)
 
     # options
-    lowercase_kw = False
-    if '-l' in args:
-        lowercase_kw = True
-        pos = args.index('-l')
-        args = args[0:pos] + args[pos+1:]
+    #lowercase_kw = False
+    #if '-l' in args:
+    #    lowercase_kw = True
+    #    pos = args.index('-l')
+    #    args = args[0:pos] + args[pos+1:]
 
     html = False
     if '-h' in args:
@@ -92,6 +99,6 @@ if __name__ == '__main__':
 
     filename = args[1]
     print sql_pretty(open(filename, 'r').read(),
-                     lowercase_kw=lowercase_kw,
+                     #lowercase_kw=lowercase_kw,
                      html=html)
 
