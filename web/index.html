@@ -33,8 +33,8 @@
       <td><a href="#savHelp" class="simpleLink">sav</a></td>
       <td><a href="#savdiffHelp" class="simpleLink">savdiff</a></td>
       <td><a href="#takeHelp" class="simpleLink">take</a></td>
-      <td><a href="#t2cHelp" class="simpleLink">t2c</a></td>
       <td><a href="#unsavHelp" class="simpleLink">unsav</a></td>
+      <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
    </tr>
@@ -54,7 +54,7 @@
    </tr>
    <tr>
       <td><a href="#sql_prettyHelp" class="simpleLink">sql_pretty</a></td>
-      <td>&nbsp;</td>
+      <td><a href="#t2cHelp" class="simpleLink">t2c</a></td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
@@ -978,7 +978,30 @@ Here is a query that lists Countries and their number of large population Cities
 
 See, Also:
 
-<a href="#topics">topics</a>
+<a href="#sql_utilities">SQL Utils Intro</a>, <a href="#topics">topics</a>
+
+
+<!-- t2c --------------------------------------------->
+
+<div id="t2cHelp">
+<h4>t2c</h4>
+<p>Table-to-CSV.  This command takes tab delinated files and converts them to csv files.  Credit to <a href="http://stackoverflow.com/users/20862/ignacio-vazquez-abrams">Ignacio Vazquez-Abrams</a> for the implementation.</p>
+
+<p>This is very useful when working with mysql -t output</p>
+
+<p>Example:<p>
+
+<pre class="syntax">
+
+   echo "select id as book_id, title from books where read='Y'" | nadb | t2c > books_read.csv
+
+</pre>
+
+See, Also:
+
+<a href="#sql_utilities">SQL Utils Intro</a>, <a href="#topics">topics</a>
+
+<hr>
 
 <br/>&nbsp;
 <br/>&nbsp;
