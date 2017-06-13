@@ -22,4 +22,5 @@ if __name__ == '__main__':
         syntax()
 
     filename = args[1]
-    pprint(json_pretty(open(filename, 'r')))
+    fp = sys.stdin if filename == '-' else open(filename, 'r')
+    pprint(json_pretty(fp))
