@@ -1,0 +1,4 @@
+# Divide memory used by total memory
+
+free | awk '/Mem/ {print $3/$2}'
+
