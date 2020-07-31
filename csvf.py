@@ -32,6 +32,7 @@ class CSV(object):
         self.lengths = []
         self.show_header = False
         self.process_successful = False
+        self.transpose = False
 
     def process(self):
         results = []
@@ -53,6 +54,22 @@ class CSV(object):
                 results.append(newrow)
                 if self.show_header:
                     break
+
+            if self.transpose:
+                results2 = []
+                i = 0
+                for row in results:
+                    j = 0
+                    for cell in row:
+                        if len(results2) <= j:
+                            results2.append([])
+                        if len(results2[j]) <= i:
+                            results2[j].append([])
+                        results2[j][i] = cell
+                        j+=1
+                    i+=1
+                results = results2
+
             self.process_successful = True
 
         except Exception, e:
@@ -173,7 +190,12 @@ if __name__ == '__main__':
     p.add_argument('-s', dest='show_header',
                    action='store_true',
                    default=False,
-                   help='show column headers')
+                   help='Show column headers')
+    p.add_argument('-t', dest='transpose',
+                   action='store_true',
+                   default=False,
+                   help='Tranpose columns and rows')
+
     args = p.parse_args()
 
     # parse
@@ -184,6 +206,7 @@ if __name__ == '__main__':
     f.colspec      = args.colspec
     f.delimiter    = args.delimiter
     f.pretty_print = args.pretty_print
+    f.transpose    = args.transpose
 
     # return result
     print f.toStr().strip()
