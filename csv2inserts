@@ -25,7 +25,7 @@ NEED_QUOTES = [ 'activity_type', 'code', 'comments', 'country_code',
                 'transaction_return_code', 'uri', 'username',
                 'verified_by', 'version', 'work_type', 'symbol' ]
 """
-NEED_QUOTES = [ 'code','description','name','address1', 'address2','address3','city','state','zipcode','email','website','phone']
+NEED_QUOTES = [ 'code','description','name','address1', 'address2','address3','city','state','zipcode','email','website','phone', 'type','created_at', 'data']
 
 #SKIP_COLUMNS = ['last_updated',
 #                'invoice_date'
