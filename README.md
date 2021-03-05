@@ -56,6 +56,7 @@ Commands Listing
 * csvformat
 * csvformat2
 * show_header
+* xlsx2csv
 
 ### SQL Tools ###
 
