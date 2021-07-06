@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/bin/env python
 #
 # convert csv file to html format
 
@@ -11,10 +11,10 @@ BORDER=1
 
 def syntax(msg=None):
     if msg:
-        print msg
-        print
-    print "csv2html <filename>"
-    print
+        print(msg)
+        print()
+    print("csv2html <filename>")
+    print()
     sys.exit(1)
 
 try:
@@ -39,13 +39,13 @@ fp.close()
 
 # output html format
 
-print "<table>"
+print("<table>")
 for row in table:
-    print "  <tr>"
+    print("  <tr>")
     for cell in row:
-        print "    <td>%s</td>" % cell
-    print "  </tr>"
-print "</table>"
+        print("    <td>%s</td>" % cell)
+    print("  </tr>")
+print("</table>")
 
 # output wiki format
 """

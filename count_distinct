@@ -1,10 +1,10 @@
-#!/usr/bin/python
+#!/bin/env python
 
 import os
 import sys
 
 def syntax():
-    print "  count_distinct <tablename> <columnname> | <dbalias>"
+    print("  count_distinct <tablename> <columnname> | <dbalias>")
     sys.exit(1)
     
 try:
@@ -12,5 +12,7 @@ try:
     columnname=sys.argv[2]
 except:
     syntax()
+print(tablename)
+print(columnname)
 
 os.system('''echo "select count(distinct(%s)) from %s" ''' % (columnname, tablename))

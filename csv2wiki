@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/bin/env python
 #
 # convert csv file to media wiki format
 
@@ -7,10 +7,10 @@ import csv
 
 def syntax(msg=None):
     if msg:
-        print msg
-        print
-    print "csv2wiki <filename>"
-    print
+        print(msg)
+        print()
+    print("csv2wiki <filename>")
+    print()
     sys.exit(1)
 
 try:
@@ -34,7 +34,7 @@ for fields in rows:
 fp.close()
 
 # output wiki format
-print '{| class="wikitable"'
+print('{| class="wikitable"')
 i = 0
 for row in table:
     i += 1
@@ -42,8 +42,8 @@ for row in table:
         delim = '!'
     else:
         delim = '|'
-        print "|-"
-    print '\n'.join(["%s%s" % (delim, x) for x in row])
+        print("|-")
+    print('\n'.join(["%s%s" % (delim, x) for x in row]))
 
-print "|}\n"
+print("|}\n")
     
