@@ -34,7 +34,8 @@ parts = stdout.split()[7:]
 # look for disk used_perc > high_water_mark
 i = 0
 while len(parts) > i:
-    filesystem, blocks, used, available, used_perc, mounted_on = parts[i:i+6]
+    filesystem, blocks, used, available, used_perc, mounted_on = \
+        [s.decode('utf-8') for s in parts[i:i+6]]
     used_perc2 = int(used_perc.strip('%'))
     if used_perc2 >= high_water_mark:
         print(filesystem, blocks, used, available, used_perc, mounted_on)
