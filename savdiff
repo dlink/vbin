@@ -2,8 +2,6 @@
 
 use Getopt::Std;
 
-
-
 my %opts = ();
 getopts ('w', \%opts);
 my $w = '';
