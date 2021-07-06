@@ -121,7 +121,7 @@ class CSV(object):
                     else:
                         raise CSVError('invalid column in colspec: %s' % x)
             if 0:
-                print('columns:', self._columns)
+                print(('columns:', self._columns))
         return self._columns
     
     def showHeader(self, table):
@@ -209,4 +209,4 @@ if __name__ == '__main__':
     f.transpose    = args.transpose
 
     # return result
-    print(f.toStr().strip())
+    print((f.toStr().strip()))

@@ -16,7 +16,7 @@ high_water_mark = 80
 if len(sys.argv) > 1:
     high_water_mark = sys.argv[1].replace('%', '')
     if not high_water_mark.isdigit():
-        print 'unrecognized percentage: %s' % high_water_mark
+        print('unrecognized percentage: %s' % high_water_mark)
         sys.exit(1)
     high_water_mark = int(high_water_mark)
 
@@ -25,7 +25,7 @@ cmd = 'df -m'
 process = Popen(cmd, shell=True, stdout=PIPE, stderr=PIPE)
 (stdout, stderr) = process.communicate()
 if stderr or process.returncode != 0:
-    print 'Error: %s.  Returncode: %s' % (stderr.strip(), process.returncode)
+    print('Error: %s.  Returncode: %s' % (stderr.strip(), process.returncode))
     sys.exit(1)
 
 # put it all into a single array
@@ -37,6 +37,6 @@ while len(parts) > i:
     filesystem, blocks, used, available, used_perc, mounted_on = parts[i:i+6]
     used_perc2 = int(used_perc.strip('%'))
     if used_perc2 >= high_water_mark:
-        print filesystem, blocks, used, available, used_perc, mounted_on
+        print(filesystem, blocks, used, available, used_perc, mounted_on)
     i += 6
 
