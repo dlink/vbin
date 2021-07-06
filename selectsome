@@ -1,10 +1,10 @@
-#!/usr/bin/python
+#!/bin/env python
 
 import os
 import sys
 
 def syntax():
-    print "  selectsome <tablename> <columnname> <value> | <dbalias>"
+    print("  selectsome <tablename> <columnname> <value> | <dbalias>")
     sys.exit(1)
     
 try:

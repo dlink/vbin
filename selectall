@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/bin/env python
 
 import os
 import sys
@@ -6,7 +6,7 @@ import sys
 try:
     tablename=sys.argv[1]
 except:
-    print "You must specify tablename."
+    print("You must specify tablename.")
     sys.exit(1)
 
 os.system("echo 'select * from %s'" % tablename)

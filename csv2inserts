@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/bin/env python
 """
 Given csv file, with column name definitions in the first row,
 Generate an SQL INSERT statement.
@@ -33,8 +33,8 @@ NEED_QUOTES = [ 'code','description','name','address1', 'address2','address3','c
 SKIP_COLUMNS = []
 
 def syntax():
-    print "csv2inserts <tablename>"
-    print
+    print("csv2inserts <tablename>")
+    print()
     sys.exit(1)
 
 # get cmd line args:
@@ -51,8 +51,8 @@ if tablename.endswith('.csv'):
 filename='%s.csv' % tablename    
 try:
     f = open(filename)
-except Exception, e:
-    print "Unable to open file: %s.\n%s" % (filename, e)
+except Exception as e:
+    print("Unable to open file: %s.\n%s" % (filename, e))
     sys.exit(1)
     
 cnt = 0
@@ -88,10 +88,11 @@ for data in rows:
     # build INSERT statement
     for i in range(len(columns)):
         data[i] = data[i].replace("'", "''")
-        if columns[i] in NEED_QUOTES and data[i] != 'NULL':
+        #if columns[i] in NEED_QUOTES and data[i] != 'NULL':
+        if data[i] != 'NULL':
             data[i] = "'%s'" % data[i]
 
-    print "INSERT INTO %s (%s) VALUES (%s);" % (tablename,
+    print("INSERT INTO %s (%s) VALUES (%s);" % (tablename,
                                              ', '.join(columns),
-                                             ', '.join(data))
+                                             ', '.join(data)))
     

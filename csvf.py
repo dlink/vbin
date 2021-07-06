@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/bin/env python
 
 # Goal:
 # csv -s FILE        # show header
@@ -18,7 +18,7 @@ import sys
 import csv
 import re
 
-SHOW_TRACEBACK = 0
+SHOW_TRACEBACK = 1
 
 class CSVError(Exception): pass
 
@@ -72,7 +72,7 @@ class CSV(object):
 
             self.process_successful = True
 
-        except Exception, e:
+        except Exception as e:
             if SHOW_TRACEBACK:
                 raise
             results = "%s: %s" % (e.__class__.__name__, e)
@@ -114,14 +114,14 @@ class CSV(object):
                 for x in self.colspec.split(','):
                     if re.match('[0-9]*-[0-9]*', x):
                         # range of columns
-                        start, fin = map(int, x.split('-'))
-                        self._columns.extend(range(start, fin+1))
+                        start, fin = list(map(int, x.split('-')))
+                        self._columns.extend(list(range(start, fin+1)))
                     elif x.isdigit():
                         self._columns.append(int(x))
                     else:
                         raise CSVError('invalid column in colspec: %s' % x)
             if 0:
-                print 'columns:', self._columns
+                print('columns:', self._columns)
         return self._columns
     
     def showHeader(self, table):
@@ -209,4 +209,4 @@ if __name__ == '__main__':
     f.transpose    = args.transpose
 
     # return result
-    print f.toStr().strip()
+    print(f.toStr().strip())

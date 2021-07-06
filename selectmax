@@ -1,10 +1,10 @@
-#!/usr/bin/python
+#!/bin/env python
 
 import os
 import sys
 
 def syntax():
-    print "  selectmax <tablename> <columnname> | <dbalias>"
+    print("  selectmax <tablename> <columnname> | <dbalias>")
     sys.exit(1)
     
 try:
