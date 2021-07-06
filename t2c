@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/bin/env python
 
 # Convert Tab delinated files to csv
 #

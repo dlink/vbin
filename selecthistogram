@@ -1,11 +1,11 @@
-#!/usr/bin/python
+#!/bin/env python
 
 import os
 import sys
 
 def syntax():
-    print "selecthistogram <tablename> <column> | <db>"
-    print "   ie.- selectone batches state"
+    print("selecthistogram <tablename> <column> | <db>")
+    print("   ie.- selectone batches state")
     sys.exit(1)
     
 try:

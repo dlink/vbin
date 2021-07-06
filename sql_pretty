@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/bin/env python
 
 import sys
 import re
@@ -70,11 +70,11 @@ def sql_pretty(sql, lowercase_kw=True, html=False):
     return sql2
 
 def syntax():
-    print
-    print "   sql_pretty [OPTIONS] <filename>"
-    print
-    print "       OPTIONS: -h  - HTML Output"
-    print
+    print()
+    print("   sql_pretty [OPTIONS] <filename>")
+    print()
+    print("       OPTIONS: -h  - HTML Output")
+    print()
     sys.exit(1)
 
 if __name__ == '__main__':
@@ -98,7 +98,7 @@ if __name__ == '__main__':
         syntax()
 
     filename = args[1]
-    print sql_pretty(open(filename, 'r').read(),
+    print(sql_pretty(open(filename, 'r').read(),
                      #lowercase_kw=lowercase_kw,
-                     html=html)
+                     html=html))
 
