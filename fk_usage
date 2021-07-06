@@ -1,10 +1,10 @@
-#!/usr/bin/python
+#!/bin/env python
 
 import os
 import sys
 
 def syntax():
-    print "  fwk_usage <schema> <tablename>"
+    print("  fwk_usage <schema> <tablename>")
     sys.exit(1)
     
 try:

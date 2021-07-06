@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/bin/env python
 
 import os
 import sys
@@ -6,7 +6,7 @@ import sys
 try:
     prog = sys.argv[1]
 except:
-    print "you must specify php program filename."
+    print("you must specify php program filename.")
     sys.exit(1)
     
 #os.system("grep -e 'class ' -e 'def ' %s" % prog)
