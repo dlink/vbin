@@ -21,10 +21,10 @@ Commands Listing
 <li> orig <br/>
 <li> origdiff <br/>
 <li> phplook <br/>
+<li> dstamp <br/>
 
 </td><td>
 
-<li> dstamp <br/>
 <li> dtstamp <br/>
 <li> pllook <br/>
 <li> psgrep <br/>
