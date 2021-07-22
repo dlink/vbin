@@ -24,6 +24,8 @@ Commands Listing
 
 </td><td>
 
+<li> dstamp <br/>
+<li> dtstamp <br/>
 <li> pllook <br/>
 <li> psgrep <br/>
 <li> pylook <br/>
