@@ -17,32 +17,33 @@
 <div id="topics">
 <p>Topics</p>
 
-<p>10/27/2014: Not yet fully documented. see github</p>
+<p>07/22/2022: Not yet fully documented. see github</p>
 
 <table border=1 cellpadding=1 cellspacing=0 width=700px>
    <tr>
       <td><a href="#installHelp" class="simpleLink">Installation</a></td>
+      <td><a href="#checkfsHelp" class="simpleLink">checkfs</a></td>
       <td><a href="#clipHelp" class="simpleLink">clip</a></td>
       <td><a href="#col_sumHelp" class="simpleLink">col_sum</a></td>
       <td><a href="#csvHelp" class="simpleLink">csv</a></td>
+      <td><a href="#dstampHelp" class="simpleLink">dstamp</a></td>
+      <td><a href="#dtstampHelp" class="simpleLink">dtstamp</a></td>
+   </tr>
+   <tr>
       <td><a href="#lsheadHelp" class="simpleLink">lshead</a></td>
       <td><a href="#psgrepHelp" class="simpleLink">psgrep</a></td>
       <td><a href="#revverHelp" class="simpleLink">revver</a></td>
-   </tr>
-   <tr>
       <td><a href="#savHelp" class="simpleLink">sav</a></td>
       <td><a href="#savdiffHelp" class="simpleLink">savdiff</a></td>
       <td><a href="#takeHelp" class="simpleLink">take</a></td>
       <td><a href="#unsavHelp" class="simpleLink">unsav</a></td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
+      <!-- td>&nbsp;</td -->
    </tr>
 </table>
 
 <p>SQL Utilities</p>
 
-<p>12/18/2014: Not yet fully documented. see github</p>
+<p>07/22/2021: Not yet fully documented. see github</p>
 <table border=1 cellpadding=1 cellspacing=0 width=700px>
    <tr>
       <td><a href="#sql_utilities" class="simpleLink">Usage Intro</a></td>
@@ -112,6 +113,45 @@ See, Also:
 
 <hr>
 
+<!-- checkfs -------------------------------------------->
+
+<div id="checkfsHelp">
+<h4>checkfs</h4>
+<p>Check free space on all filesystems. Show those with less than
+  <i>n_percent</i> free.  Default is 80%.  You can put this in cron on all servers.
+
+<pre class="syntax">
+
+    $ checkfs
+    /dev/xvda1     165007104 150156464  14850639  91% /
+
+</pre>
+
+setting <i>n_percent</i> to 70
+
+<pre class="syntax">
+
+    $ checkfs 70
+    /dev/xvda1     165007104 150156464  14850639  91% /
+    /dev/xvda1      82566196  56819240  21553656  73% /
+
+</pre>
+
+In cron:
+
+<pre class="syntax">
+
+  # check filesystem
+    0 * * * *  checkfs
+
+</pre>
+
+See, Also:
+
+<a href="#topics">topics</a>
+<hr>
+
+
 <!-- clip -------------------------------------------->
 
 <div id="clipHelp">
@@ -126,9 +166,9 @@ See, Also:
 
 <p>Clip defaults to 80 columns.</p>
 
-<p>Example: 
+<p>Example:
 
-For 80 column screens: 
+For 80 column screens:
 
 <pre>
 
@@ -138,7 +178,7 @@ For 80 column screens:
 
 </pre>
 
-For wider screens     
+For wider screens
 
 <pre>
 
@@ -164,8 +204,8 @@ See, Also:
    &lt;STDOUT&gt; | col_sum [ &lt;COL&gt; ]
 
 	COL - Number of the column you want to sum up
-              Zero base.
-              Default is 0
+	      Zero base.
+	      Default is 0
 
 </pre>
 
@@ -204,8 +244,8 @@ See, Also:
    optional arguments:
      -               Treat &ltSTDIN&gt; instead of &ltfilename&gt;
      -h, --help      show this help message and exit
-     -c &lt;colspec&gt;    List or range of column numbers.  
-                     They can be in any order.  Eq.: 2,1,4-6
+     -c &lt;colspec&gt;    List or range of column numbers.
+		     They can be in any order.  Eq.: 2,1,4-6
      -d &lt;delimiter&gt;  Set delimiter. Default is comma (,)
      -p              Pretty-Print output
      -s              show column headers
@@ -218,7 +258,7 @@ Show file header
 
 <pre>
 
-   $ csv -s books.csv 
+   $ csv -s books.csv
    1. id
    2. isbn
    3. name
@@ -283,6 +323,59 @@ See, Also:
 
 <a href="#topics">topics</a>
 <hr>
+
+<!-- dstamp --------------------------------------------->
+
+<div id="dstampHelp">
+<h4>dstamp</h4>
+<p>Create a copy of a file, preserving timestamp and permissions, with the current date stamp append as "_YYYY-MM-DD".</p>
+
+<pre class="syntax">
+
+   dstamp &lt;filename&gt;
+
+</pre>
+<p>Example:<p>
+
+<pre>
+
+   $ dstamp products.csv
+   cp -p products.csv products.csv_2021-07-22
+
+</pre>
+
+See, Also:
+
+<a href="#topics">topics</a>, <a href="#dstampHelp">dstamp</a>, <a href="#savHelp">sav</a>, <a href="#savdiffHelp">savdiff</a>, <a href="#unsavHelp">unsav</a>, <a href="#revverHelp">revver</a>
+
+<hr>
+
+<!-- dtstamp --------------------------------------------->
+
+<div id="dtstampHelp">
+<h4>dtstamp</h4>
+<p>Create a copy of a file, preserving timestamp and permissions, with the current date and time stamp append as "_YYYY-MM-DD_HHMMSS".</p>
+
+<pre class="syntax">
+
+   dtstamp &lt;filename&gt;
+
+</pre>
+<p>Example:<p>
+
+<pre>
+
+   $ dtstamp products.csv
+   cp -p products.csv products.csv_2021-07-22_103512
+
+</pre>
+
+See, Also:
+
+<a href="#topics">topics</a>, <a href="#dtstampHelp">dtstamp</a>, <a href="#savHelp">sav</a>, <a href="#savdiffHelp">savdiff</a>, <a href="#unsavHelp">unsav</a>, <a href="#revverHelp">revver</a>
+
+<hr>
+
 <!-- lshead ------------------------------------------>
 
 <div id="lsheadHelp">
@@ -352,14 +445,14 @@ The command will aways return your current process, as well.
 
 <pre>
 
-   $ psgrep plague  
-   plague      29510 29508  0 Sep26 ?        00:00:00 -bash -c cd /asphyxia/lib && ./asphyx.py 
+   $ psgrep plague
+   plague      29510 29508  0 Sep26 ?        00:00:00 -bash -c cd /asphyxia/lib && ./asphyx.py
    plague      29539 29510  0 Sep26 ?        02:50:51 /usr/local/bin/python ./asphx.py
-   plague      29577 29576  0 Sep26 ?        00:00:00 -bash -c cd /asphyxia/lib && ./workflowd.py 
+   plague      29577 29576  0 Sep26 ?        00:00:00 -bash -c cd /asphyxia/lib && ./workflowd.py
    plague      29606 29577  0 Sep26 ?        02:38:57 python ./workflowd.py
 
 </pre>
-<p>No, but he's running some daemons.</p>
+<p>No, but he's running some daemons.</p> <!-- ' -->
 
 See, Also:
 
@@ -377,9 +470,9 @@ See, Also:
 
    revver [&lt;options&gt;] &lt;filename&gt;
 
-        options:
-           -q  quite mode
-           -u  Unroll revisions
+	options:
+	   -q  quite mode
+	   -u  Unroll revisions
 
 </pre>
 
@@ -417,7 +510,7 @@ Running the same command a second time (after recreating the original):
 
 See, Also:
 
-<a href="#topics">topics</a>, <a href="#savHelp">sav</a>, <a href="#savdiffHelp">savdiff</a>, <a href="#unsavHelp">unsav</a>
+<a href="#topics">topics</a>, <a href="#dstampHelp">dstamp</a>, <a href="#dtstampHelp">dtstamp</a>, <a href="#savHelp">sav</a>, <a href="#savdiffHelp">savdiff</a>, <a href="#unsavHelp">unsav</a>
 
 <hr>
 
@@ -443,7 +536,7 @@ See, Also:
 
 See, Also:
 
-<a href="#topics">topics</a>, <a href="#savdiffHelp">savdiff</a>, <a href="#unsavHelp">unsav</a>, <a href="#revverHelp">revver</a>
+<a href="#topics">topics</a>, <a href="#dstampHelp">dstamp</a>, <a href="#dtstampHelp">dtstamp</a>, <a href="#unsavHelp">unsav</a>, <a href="#revverHelp">revver</a>
 
 <hr>
 <!-- savdiff ----------------------------------------->
@@ -469,7 +562,7 @@ See, Also:
 
 See, Also:
 
-<a href="#topics">topics</a>, <a href="#savHelp">sav</a>, <a href="#unsavHelp">unsav</a>, <a href="#revverHelp">revver</a>
+<a href="#topics">topics</a>, <a href="#dstampHelp">dstamp</a>, <a href="#dtstampHelp">dtstamp</a>, <a href="#savHelp">sav</a>, <a href="#unsavHelp">unsav</a>, <a href="#revverHelp">revver</a>
 
 <hr>
 <!-- take -------------------------------------------->
@@ -526,7 +619,7 @@ See, Also:
 
 See, Also:
 
-<a href="#topics">topics</a>, <a href="#savHelp">sav</a>, <a href="#savdiffHelp">savdiff</a>, <a href="#revverHelp">revver</a>
+<a href="#topics">topics</a>, <a href="#dstampHelp">dstamp</a>, <a href="#dtstampHelp">dtstamp</a>, <a href="#savHelp">sav</a>, <a href="#savdiffHelp">savdiff</a>, <a href="#revverHelp">revver</a>
 
 
 
@@ -777,9 +870,9 @@ See, Also:
 
    $ desc providers | devdb | grep -i date
 
-   start_dated &nbsp; datetime &nbsp; YES &nbsp;  &nbsp; NULL &nbsp; 
+   start_dated &nbsp; datetime &nbsp; YES &nbsp;  &nbsp; NULL &nbsp;
    last_updated &nbsp; timestamp &nbsp; NO &nbsp;  &nbsp; CURRENT_TIMESTAMP &nbsp; on update CURRENT_TIMESTAMP
-   created &nbsp; datetime &nbsp; YES &nbsp;  &nbsp; NULL &nbsp; 
+   created &nbsp; datetime &nbsp; YES &nbsp;  &nbsp; NULL &nbsp;
 
 </pre>
 
@@ -940,7 +1033,7 @@ Format SQL statements nicely.
    sql_pretty [OPTIONS] &lt;filename&gt;
 
        OPTIONS: -l  - lowercase keywords
-                -h  - HTML Output
+		-h  - HTML Output
 
 </pre>
 
