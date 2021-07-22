@@ -1,0 +1,14 @@
+#!/bin/bash
+
+datestamp=`date +"%Y-%m-%d_%H%M%S"`
+
+if test -f "$1_${datestamp}" ; then
+   echo "$1_${datestamp} already exits."
+   exit 1
+fi
+
+echo cp -p $1 $1_${datestamp}
+cp -p $1 $1_${datestamp}
+
+
+
