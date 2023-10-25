@@ -23,7 +23,7 @@ SHOW_TRACEBACK = 1
 class CSVError(Exception): pass
 
 class CSV(object):
-    
+
     def __init__(self, file):
         self.file = file
         self.delimiter = ','
@@ -76,9 +76,9 @@ class CSV(object):
             if SHOW_TRACEBACK:
                 raise
             results = "%s: %s" % (e.__class__.__name__, e)
-        return results        
-    
-    def processCell(self, i, cell):        
+        return results
+
+    def processCell(self, i, cell):
         '''Given current column counter, and raw cell data
            Behavior: Keep max lengths up-to-date
                      Add double quotes on Cell if nec.
@@ -102,7 +102,7 @@ class CSV(object):
             else:
                 self._fp = open(self.file, 'rU')
         return self._fp;
-    
+
     @property
     def columns(self):
         if '_columns' not in self.__dict__:
@@ -123,7 +123,7 @@ class CSV(object):
             if 0:
                 print(('columns:', self._columns))
         return self._columns
-    
+
     def showHeader(self, table):
         o = ''
         for i, x in enumerate(table[0]):
@@ -143,7 +143,7 @@ class CSV(object):
                     o += "%s\n" % field
                 i += 1
         return o
-    
+
 
     def toStr(self):
         results = self.process()
@@ -176,7 +176,8 @@ if __name__ == '__main__':
 
     # Set up Args:
     p = argparse.ArgumentParser(description="CSV file utility.")
-    p.add_argument('file')
+    p.add_argument('file', nargs='?', default='-',
+                   help='Input file. If not provided, reads from stdin')
     p.add_argument('-c', dest='colspec',
                    metavar='<colspec>',
                    help='List or range of column numbers.  eq. - 2,1,4-6')
