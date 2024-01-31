@@ -14,4 +14,4 @@ try:
 except:
     syntax()
 
-os.system('''echo "select * from %s where %s = '%s' \G"''' % (tablename, columnname, value))
+os.system('''echo "select * from %s where %s = '%s' \\G"''' % (tablename, columnname, value))
