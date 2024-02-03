@@ -1,7 +1,7 @@
 vbin
 ====
 
-vbin is a collection of Command Line Tools for Unix.  They are used with other Unix Bash commands to form a formiable arsenal of tools.
+vbin is a collection of Command Line Tools for Unix used with other Unix Bash commands to form a formidable arsenal of tools.
 
 Source: https://github.com/dlink/vbin
 
