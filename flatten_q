@@ -1,3 +1,5 @@
+# Convert list of values into a single line of quoted comma separated values
+
 tr '\n' ' ' | sed -e "s/^/'/" -e "s/ /', '/g" -e "s/, '$//" 
 echo
 

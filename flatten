@@ -1,3 +1,5 @@
+# Convert a list of values into a single line space separated
+
 tr '\n' ' ' 
 echo
 

@@ -1,0 +1,5 @@
+# Convert a list of values into a single line of comma separated list of values
+
+tr '\n' ' ' | sed -e "s/ /, /g" -e 's/, $//'
+echo
+
