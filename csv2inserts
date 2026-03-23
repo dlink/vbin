@@ -1,5 +1,5 @@
 #!/bin/env python
-"""
+r"""
 Given csv file, with column name definitions in the first row,
 Generate an SQL INSERT statement.
 
@@ -7,7 +7,7 @@ commas and quotes in input file need to be escaped.  eq. \, and \'.
 
 quotes will be converted to 
 The tokens "(comma)" and "(quote)" in the csv input file will be converted to for ",", and "''" respectively in the output. 
-""" 
+"""
 
 import sys
 import csv
