@@ -87,17 +87,19 @@ You can add the PATH command to your .bash_profile.
 
 Here is an example install as root:
 <pre>
+   $ cd ~
+   $ git clone git@github.com:dlink/vbin.git
 
    $ sudo su -
    # cd /usr/local
-   # git clone git@github.com:dlink/vbin.git
-
+   # mv ~/vbin .
    # cd /etc/profile.d
-   # cat > vbin
+   # cat > vbin.sh
    PATH=$PATH:/usr/local/vbin
    ^D  (cntrl-D)
-
 </pre>
+
+<p>Logout and log back in again.</p>
 
 Test it:
 
